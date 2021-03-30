@@ -31,4 +31,17 @@ public class TileManager : MonoBehaviour
             tiles.Add(tile);
         }
     }
+
+    public SmartTile GetStartTile()
+    {
+        foreach (SmartTile tile in tiles)
+        {
+            if (typeof(StartTile) == tile.GetType())
+            {
+                return tile;
+            }
+        }
+
+        return tiles[0];
+    }
 }
