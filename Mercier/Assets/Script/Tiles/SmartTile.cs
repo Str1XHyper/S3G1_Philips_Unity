@@ -6,7 +6,6 @@ public class SmartTile : MonoBehaviour
 {
     [SerializeField] private Material tileColor;
     [SerializeField] private SmartTile nextTile;
-    [SerializeField] private 
 
     private bool starOnTile;
 
@@ -23,16 +22,6 @@ public class SmartTile : MonoBehaviour
     public virtual void HandleTile()
     {
 
-    }
-
-    private void OnDrawGizmos()
-    {
-        MeshRenderer renderer = GetComponentInChildren<MeshRenderer>();
-
-        if (TileColor != null)
-        {
-            renderer.material = TileColor;
-        }
     }
 
     public bool StarOnTile { get => starOnTile; set => starOnTile = value; }
