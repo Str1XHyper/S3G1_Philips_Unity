@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class GroupManager : MonoBehaviour
 {
     #region SingleTon
-    public static PlayerManager instance;
+    public static GroupManager instance;
 
     private void Awake()
     {
@@ -16,10 +16,9 @@ public class PlayerManager : MonoBehaviour
     }
     #endregion
 
-    List<Player> playersInGame = new List<Player>();
+    private List<PlayerGroup> tiles = new List<PlayerGroup>();
 
     private void Start()
     {
-        
     }
 }

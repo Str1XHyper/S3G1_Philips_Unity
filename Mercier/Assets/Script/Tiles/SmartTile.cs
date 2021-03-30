@@ -27,4 +27,5 @@ public class SmartTile : MonoBehaviour
     public bool StarOnTile { get => starOnTile; set => starOnTile = value; }
     public Material TileColor { get => tileColor; private set => tileColor = value; }
     public SmartTile NextTile { get => nextTile; private set => nextTile = value; }
+    public Vector3 PawnPos { get; internal set; }
 }
