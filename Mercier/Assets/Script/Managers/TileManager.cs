@@ -28,7 +28,7 @@ public class TileManager : MonoBehaviour
     {
         foreach (SmartTile tile in transform.GetComponentsInChildren<SmartTile>())
         {
-
+            tiles.Add(tile);
         }
     }
 }
