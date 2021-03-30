@@ -14,15 +14,12 @@ public class TileManager : MonoBehaviour
         {
             instance = this;
         }
+
+        SetupTileList();
     }
     #endregion
 
     private List<SmartTile> tiles = new List<SmartTile>();
-
-    private void Start()
-    {
-        SetupTileList();
-    }
 
     private void SetupTileList()
     {

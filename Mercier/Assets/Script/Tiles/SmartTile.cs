@@ -6,6 +6,7 @@ public class SmartTile : MonoBehaviour
 {
     [SerializeField] private Material tileColor;
     [SerializeField] private SmartTile nextTile;
+    [SerializeField] private Transform pawnPos;
 
     private bool starOnTile;
 
@@ -27,5 +28,5 @@ public class SmartTile : MonoBehaviour
     public bool StarOnTile { get => starOnTile; set => starOnTile = value; }
     public Material TileColor { get => tileColor; private set => tileColor = value; }
     public SmartTile NextTile { get => nextTile; private set => nextTile = value; }
-    public Vector3 PawnPos { get; internal set; }
+    public Vector3 PawnPos { get => pawnPos.position; private set => pawnPos.position = value; }
 }

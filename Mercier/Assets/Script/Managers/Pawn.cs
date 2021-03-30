@@ -11,6 +11,14 @@ public class Pawn : MonoBehaviour
         currentSmartTile = TileManager.instance.GetStartTile();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            MovePawnToNextSpace();
+        }
+    }
+
     public void MovePawnToNextSpace()
     {
         SmartTile tileToMoveTo = currentSmartTile.NextTile;
@@ -48,5 +56,7 @@ public class Pawn : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
+
+        MovePawnTransform(newPos);
     }
 }
