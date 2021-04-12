@@ -69,7 +69,7 @@ public class QuestionManager : MonoBehaviour
     {
         //TODO: Hier vraag op scherm laten zien TIJN
 
-        Debug.Log(allQuestions[currentQuestionIndex].question);
+        //Debug.Log(allQuestions[currentQuestionIndex].question);
 
         currentQuestionIndex++;
     }

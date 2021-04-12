@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class Pawn : MonoBehaviour
@@ -6,57 +7,95 @@ public class Pawn : MonoBehaviour
     [SerializeField] private int amountOfFramesToGetToNextSpace;
     private SmartTile currentSmartTile;
 
-    private void Start()
+    private int movedSpaces = 0;
+    private bool isMoving = false;
+    private bool choosingDirection = false;
+
+    public void MovePawn(int amountToMove)
     {
-        currentSmartTile = TileManager.instance.GetStartTile();
+        StartCoroutine(MovePawnMultipleSpaces(amountToMove));
     }
 
-    private void Update()
+    public void MovePawnToTile(SmartTile tileToMoveTo)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MovePawnToNextSpace();
-        }
+        currentSmartTile = tileToMoveTo;
+        MovePawnTransform(currentSmartTile.PawnPos);
     }
 
-    public void MovePawnToNextSpace()
+    private void MovePawnToNextSpace()
     {
         SmartTile tileToMoveTo = currentSmartTile.NextTile;
+
+        tileToMoveTo = CheckDirectionTile(tileToMoveTo);
 
         StartCoroutine(LerpPawnToNewPos(currentSmartTile.PawnPos, tileToMoveTo.PawnPos));
 
         currentSmartTile = tileToMoveTo;
     }
 
-    public void MovePawnToTile(SmartTile tileToMoveTo)
+    private SmartTile CheckDirectionTile(SmartTile tileToMoveTo)
     {
-        currentSmartTile = tileToMoveTo;
+        if (currentSmartTile.GetType() == typeof(ChooseDirectionTile))
+        {
+            ChooseDirectionTile directionTile = (ChooseDirectionTile)currentSmartTile;
 
-        MovePawnTransform(currentSmartTile.PawnPos);
-    }
+            if (currentSmartTile.MoveToNextTile)
+            {
+                tileToMoveTo = directionTile.AlternateNextTile;
+            }
+        }
 
-    private void MovePawnTransform(Vector3 posToMoveTo)
-    {
-        transform.position = posToMoveTo;
+        return tileToMoveTo;
     }
 
     private IEnumerator LerpPawnToNewPos(Vector3 oldPos, Vector3 newPos)
     {
-        int elapsedFrames = 0;
+        IsMoving = true;
 
-        while (elapsedFrames < amountOfFramesToGetToNextSpace)
+        for (int elapsedFrames = 0; elapsedFrames < amountOfFramesToGetToNextSpace; elapsedFrames++)
         {
             float interpolairRatio = (float)elapsedFrames / (float)amountOfFramesToGetToNextSpace;
-
             Vector3 nextLerpedPos = Vector3.Lerp(oldPos, newPos, interpolairRatio);
 
             MovePawnTransform(nextLerpedPos);
-
-            elapsedFrames++;
 
             yield return new WaitForFixedUpdate();
         }
 
         MovePawnTransform(newPos);
+        movedSpaces++;
+        IsMoving = false;
     }
+
+    private void HandlePassingOfTile()
+    {
+        currentSmartTile.HandlePassingTile(TurnManager.instance.CurrentPlayerGroup);
+    }
+
+    private IEnumerator MovePawnMultipleSpaces(int amountOfSpaces)
+    {
+        movedSpaces = 0;
+
+        HandlePassingOfTile();
+
+        while (movedSpaces < amountOfSpaces)
+        {
+            if (!IsMoving && !choosingDirection)
+            {
+                MovePawnToNextSpace();
+
+                if (movedSpaces < amountOfSpaces)
+                    HandlePassingOfTile();
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private void MovePawnTransform(Vector3 posToMoveTo) { transform.position = posToMoveTo; }
+
+    public int MovedSpaces { get => movedSpaces; private set => movedSpaces = value; }
+    public bool IsMoving { get => isMoving; set => isMoving = value; }
+    public SmartTile CurrentSmartTile { get => currentSmartTile; private set => currentSmartTile = value; }
+    public bool ChoosingDirection { get => choosingDirection; set => choosingDirection = value; }
 }

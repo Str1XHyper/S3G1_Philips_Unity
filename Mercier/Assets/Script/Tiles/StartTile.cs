@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StartTile : SmartTile
 {
-    public override void HandleTile()
+    public override void HandleTile(PlayerGroup currentPlayerGroup)
     {
-        base.HandleTile();
+        base.HandleTile(currentPlayerGroup);
     }
 }

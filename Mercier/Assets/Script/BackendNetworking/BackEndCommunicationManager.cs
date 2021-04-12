@@ -46,6 +46,9 @@ public class BackEndCommunicationManager : MonoBehaviour
         {
             string response = www.downloadHandler.text;
             questions = JsonHelper.getJsonArray<Question>(response);
+
+            Debug.Log(questions[0].question);
+            Debug.Log(response);
         }
     }
 }
