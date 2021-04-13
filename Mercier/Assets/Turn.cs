@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class Turn
 {
@@ -30,6 +31,11 @@ public class Turn
         if (!alreadyMoved)
         {
             RollDice();
+            
+            //Cheat code TODO: remove at final
+            if (Input.GetKey(KeyCode.Alpha1))
+                rolledNumber = 1;
+
             currentPlayerGroup.GroupPawn.MovePawn(rolledNumber);
             alreadyMoved = true;
         }

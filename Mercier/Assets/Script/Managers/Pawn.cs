@@ -27,10 +27,26 @@ public class Pawn : MonoBehaviour
         SmartTile tileToMoveTo = currentSmartTile.NextTile;
 
         tileToMoveTo = CheckDirectionTile(tileToMoveTo);
+        tileToMoveTo = CheckPortalTile(tileToMoveTo);
 
         StartCoroutine(LerpPawnToNewPos(currentSmartTile.PawnPos, tileToMoveTo.PawnPos));
 
         currentSmartTile = tileToMoveTo;
+    }
+
+    private SmartTile CheckPortalTile(SmartTile tileToMoveTo)
+    {
+        if (currentSmartTile.GetType() == typeof(PortalTile))
+        {
+            if (!currentSmartTile.MoveToNextTile)
+            {
+                PortalTile portalTile = (PortalTile)currentSmartTile;
+                tileToMoveTo = portalTile.AlternateNextTile;
+                currentSmartTile.MoveToNextTile = true;
+            }
+        }
+
+        return tileToMoveTo;
     }
 
     private SmartTile CheckDirectionTile(SmartTile tileToMoveTo)
