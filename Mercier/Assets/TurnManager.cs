@@ -31,7 +31,7 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
-        StartNewTurn();
+        StarPlacer.instance.PlaceStarOnBoard();
         CurrentPlayerGroup.GroupPawn.MovePawnToTile(TileManager.instance.GetStartTile());
     }
 
@@ -42,30 +42,33 @@ public class TurnManager : MonoBehaviour
             StartNewTurn();
         }
 
-        switch (currentTurn.CurrentTurnState)
+        if (currentTurn != null)
         {
-            case TurnState.START:
-                Debug.Log(currentTurn.CurrentTurnState);
-                currentTurn.Start();
-                break;
-            case TurnState.MOVEMENT:
-                currentTurn.Movement();
-                break;
-            case TurnState.ENCOUNTER_SPACE:
-                currentTurn.EncounterSpace();
-                break;
-            case TurnState.END:
-                currentTurn.End();
-                EndOfTurn();
-                break;
-            default:
-                break;
-        }
+            switch (currentTurn.CurrentTurnState)
+            {
+                case TurnState.START:
+                    Debug.Log(currentTurn.CurrentTurnState);
+                    currentTurn.Start();
+                    break;
+                case TurnState.MOVEMENT:
+                    currentTurn.Movement();
+                    break;
+                case TurnState.ENCOUNTER_SPACE:
+                    currentTurn.EncounterSpace();
+                    break;
+                case TurnState.END:
+                    currentTurn.End();
+                    EndOfTurn();
+                    break;
+                default:
+                    break;
+            }
 
-        if (currentTurn.CurrentTurnState != lastState)
-        {
-            lastState = currentTurn.CurrentTurnState;
-            Debug.Log(lastState);
+            if (currentTurn.CurrentTurnState != lastState)
+            {
+                lastState = currentTurn.CurrentTurnState;
+                Debug.Log(lastState);
+            }
         }
     }
 

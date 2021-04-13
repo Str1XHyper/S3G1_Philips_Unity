@@ -112,6 +112,7 @@ MonoBehaviour:
   tileColor: {fileID: 0}
   nextTile: {fileID: 0}
   pawnPos: {fileID: 0}
+  star: {fileID: 0}
 --- !u!1 &6083070658437251815
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +303,7 @@ PrefabInstance:
     - target: {fileID: 4769726239792899595, guid: 17a4362b64452be4e86b0cdf4cf1fb47,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17a4362b64452be4e86b0cdf4cf1fb47, type: 3}

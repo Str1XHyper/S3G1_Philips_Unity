@@ -15,11 +15,15 @@ public class TileManager : MonoBehaviour
             instance = this;
         }
 
-        SetupTileList();
     }
     #endregion
 
     private List<SmartTile> tiles = new List<SmartTile>();
+
+    private void Start()
+    {
+        SetupTileList();
+    }
 
     private void SetupTileList()
     {
@@ -41,4 +45,6 @@ public class TileManager : MonoBehaviour
 
         return tiles[0];
     }
+
+    public List<SmartTile> Tiles { get => tiles; set => tiles = value; }
 }
