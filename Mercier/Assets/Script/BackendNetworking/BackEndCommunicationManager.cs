@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class BackEndCommunicationManager : MonoBehaviour
 {
+    //[System.Runtime.InteropServices.DllImport("__Internal")]
+    //private static extern string getQuestions();
+
     #region SingleTon
 
     public static BackEndCommunicationManager instance;
@@ -24,7 +27,8 @@ public class BackEndCommunicationManager : MonoBehaviour
     private void Start()
     {
         //LoadAllQuestionsFromLesson(GetLessonIdFromURL());
-        LoadAllQuestionsFromLesson("");
+        //LoadAllQuestionsFromLesson("");
+        //SetAllQuestions(getQuestions());
     }
 
     private string GetLessonIdFromURL()
@@ -45,6 +49,16 @@ public class BackEndCommunicationManager : MonoBehaviour
         StartCoroutine(GetAllQuestions(uri));
     }
 
+    public void SetAllQuestions(string json)
+    {
+        JsonToQuestionArray(json);
+    }
+
+    private void JsonToQuestionArray(string json)
+    {
+        questions = JsonHelper.getJsonArray<Question>(json);
+    }
+
     IEnumerator GetAllQuestions(string uri)
     {
         UnityWebRequest www = UnityWebRequest.Get(uri);
@@ -53,7 +67,8 @@ public class BackEndCommunicationManager : MonoBehaviour
         if (www.responseCode == 200)
         {
             string response = www.downloadHandler.text;
-            questions = JsonHelper.getJsonArray<Question>(response);
+
+            JsonToQuestionArray(response);
 
             Debug.Log(questions[0].question);
             Debug.Log(response);

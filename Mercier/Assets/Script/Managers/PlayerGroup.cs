@@ -6,8 +6,8 @@ public class PlayerGroup : MonoBehaviour
     [SerializeField]private Pawn groupPawn;
     [SerializeField]private Transform cam;
 
-    private int currentAmountMoney = 1;
-    private int currentAmountOfStars = 1;
+    private int currentAmountMoney = 0;
+    private int currentAmountOfStars = 0;
 
     /// <summary>
     /// Subtract money from the playergroup amount

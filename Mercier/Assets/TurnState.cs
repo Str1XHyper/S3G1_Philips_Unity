@@ -9,5 +9,6 @@ public enum TurnState
     START,
     MOVEMENT,
     ENCOUNTER_SPACE,
-    END
+    END,
+    QUESTION
 }

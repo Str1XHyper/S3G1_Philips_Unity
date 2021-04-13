@@ -24,8 +24,8 @@ public class UI_manager : MonoBehaviour
 
     public void UpdateText()
     {
-        pointText.text = TurnManager.instance.CurrentPlayerGroup.CurrentMoneyAmount.ToString();
-        starText.text = TurnManager.instance.CurrentPlayerGroup.CurrentAmountOfStars.ToString();
+        pointText.text = "Points: " + TurnManager.instance.CurrentPlayerGroup.CurrentMoneyAmount.ToString();
+        starText.text = "Stars: " + TurnManager.instance.CurrentPlayerGroup.CurrentAmountOfStars.ToString();
     }
 
     public void UpdateQuestion(string questionText)

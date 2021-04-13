@@ -74,7 +74,7 @@ public class QuestionManager : MonoBehaviour
 
         currentQuestionIndex++;
 
-        if (allQuestions.Count >= currentQuestionIndex)
+        if (currentQuestionIndex >= allQuestions.Count)
         {
             currentQuestionIndex = 0;
         }

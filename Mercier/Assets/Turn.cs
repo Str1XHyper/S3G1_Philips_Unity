@@ -54,7 +54,7 @@ public class Turn
 
     public void End()
     {
-        
+        currentTurnState = TurnState.QUESTION;
     }
 
     private void RollDice()

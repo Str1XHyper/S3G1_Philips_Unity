@@ -60,6 +60,8 @@ public class TurnManager : MonoBehaviour
                     currentTurn.End();
                     EndOfTurn();
                     break;
+                case TurnState.QUESTION:
+                    break;
                 default:
                     break;
             }
