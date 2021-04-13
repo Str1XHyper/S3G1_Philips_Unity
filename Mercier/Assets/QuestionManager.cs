@@ -67,7 +67,7 @@ public class QuestionManager : MonoBehaviour
 
     public void AskQuestion()
     {
-        //TODO: Hier vraag op scherm laten zien TIJN
+        //TODO: Hier vraag op scherm laten zien
 
         //Debug.Log(allQuestions[currentQuestionIndex].question);
 

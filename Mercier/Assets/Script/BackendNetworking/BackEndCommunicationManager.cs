@@ -23,16 +23,24 @@ public class BackEndCommunicationManager : MonoBehaviour
 
     private void Start()
     {
+        //LoadAllQuestionsFromLesson(GetLessonIdFromURL());
         LoadAllQuestionsFromLesson("");
+    }
 
-        //TODO: Call this from where it is supposed to be called
+    private string GetLessonIdFromURL()
+    {
+        string url = Application.absoluteURL;
+
+        string lessonIDFromUrl = url.Split('=')[1];
+
+        return lessonIDFromUrl;
     }
 
     public void LoadAllQuestionsFromLesson(string LessonId)
     {
         LessonId = "ac04dcab-b025-45ff-b90a-d15b73759284";
 
-        string uri = "localhost:3000/Question/" + LessonId;
+        string uri = "localhost:3000/Question/Planned/" + LessonId;
 
         StartCoroutine(GetAllQuestions(uri));
     }
