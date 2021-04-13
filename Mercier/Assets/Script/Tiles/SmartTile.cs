@@ -48,6 +48,7 @@ public class SmartTile : MonoBehaviour
 
                 Debug.Log("You bought a star for " + payedAmount + ".");
                 Debug.Log("New balance is " + currentPlayerGroup.CurrentMoneyAmount);
+                UI_manager.instance.UpdateText();
 
                 StarPlacer.instance.PlaceStarOnBoard();
             }

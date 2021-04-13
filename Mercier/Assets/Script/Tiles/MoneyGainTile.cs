@@ -13,5 +13,6 @@ public class MoneyGainTile : SmartTile
         currentPlayerGroup.GiveMoney(AmountToGain);
 
         Debug.Log("You gained " + AmountToGain + " money you new balance is " + currentPlayerGroup.CurrentMoneyAmount);
+        UI_manager.instance.UpdateText();
     }
 }

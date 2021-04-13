@@ -68,10 +68,16 @@ public class QuestionManager : MonoBehaviour
     public void AskQuestion()
     {
         //TODO: Hier vraag op scherm laten zien
+        UI_manager.instance.UpdateQuestion(allQuestions[currentQuestionIndex].question);
 
         //Debug.Log(allQuestions[currentQuestionIndex].question);
 
         currentQuestionIndex++;
+
+        if (allQuestions.Count >= currentQuestionIndex)
+        {
+            currentQuestionIndex = 0;
+        }
     }
     public List<Question> AllQuestions { get => allQuestions; private set => allQuestions = value; }
 }

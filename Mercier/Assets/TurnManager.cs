@@ -69,6 +69,8 @@ public class TurnManager : MonoBehaviour
                 lastState = currentTurn.CurrentTurnState;
                 Debug.Log(lastState);
             }
+
+            UI_manager.instance.UpdateText();
         }
     }
 

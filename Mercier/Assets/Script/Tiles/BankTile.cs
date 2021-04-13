@@ -32,6 +32,7 @@ public class BankTile : SmartTile
         Debug.Log("You received: " + moneyInBank);
         moneyInBank = 0;
         Debug.Log("New bank balance: " + moneyInBank);
+        UI_manager.instance.UpdateText();
     }
 
     private void GiveMoneyToBank(PlayerGroup currentPlayerGroup)
@@ -42,5 +43,6 @@ public class BankTile : SmartTile
 
         Debug.Log("Stuffed money in bank: " + subtractAmount);
         Debug.Log("New bank balance: " + moneyInBank);
+        UI_manager.instance.UpdateText();
     }
 }

@@ -13,5 +13,6 @@ public class PaymentTile : SmartTile
         int payedAmount = currentPlayerGroup.SubtractMoney(PayUpAmount);
         Debug.Log("You lost " + payedAmount + " money");
         Debug.Log("New balance is " + currentPlayerGroup.CurrentMoneyAmount + " money");
+        UI_manager.instance.UpdateText();
     }
 }

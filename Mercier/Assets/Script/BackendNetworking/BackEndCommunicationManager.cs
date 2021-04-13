@@ -38,7 +38,7 @@ public class BackEndCommunicationManager : MonoBehaviour
 
     public void LoadAllQuestionsFromLesson(string LessonId)
     {
-        LessonId = "ac04dcab-b025-45ff-b90a-d15b73759284";
+        LessonId = "1";
 
         string uri = "localhost:3000/Question/Planned/" + LessonId;
 
@@ -57,6 +57,7 @@ public class BackEndCommunicationManager : MonoBehaviour
 
             Debug.Log(questions[0].question);
             Debug.Log(response);
+            UI_manager.instance.UpdateText();
         }
     }
 }

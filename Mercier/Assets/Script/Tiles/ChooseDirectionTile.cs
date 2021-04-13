@@ -25,6 +25,7 @@ public class ChooseDirectionTile : SmartTile
         StartCoroutine(ChooseDirectionPrompt(currentPlayerGroup));
 
         Debug.Log("Choose " + defaultDirection + " or " + alternateDirection);
+        UI_manager.instance.UpdateText();
     }
 
     private IEnumerator ChooseDirectionPrompt(PlayerGroup currentPlayerGroup)

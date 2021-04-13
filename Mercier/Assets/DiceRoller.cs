@@ -30,5 +30,6 @@ public class DiceRoller : MonoBehaviour
     {
         randomNumber = Random.Range(DiceMin, DiceMax);
         Debug.Log("You rolled: " + randomNumber);
+        UI_manager.instance.UpdateText();
     }
 }
