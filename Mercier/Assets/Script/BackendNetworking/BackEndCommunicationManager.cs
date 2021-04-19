@@ -26,7 +26,7 @@ public class BackEndCommunicationManager : MonoBehaviour
 
     private void Start()
     {
-        //LoadAllQuestionsFromLesson(GetLessonIdFromURL());
+        LoadAllQuestionsFromLesson(GetLessonIdFromURL());
         //LoadAllQuestionsFromLesson("");
         //SetAllQuestions(getQuestions());
     }
@@ -44,7 +44,7 @@ public class BackEndCommunicationManager : MonoBehaviour
     {
         LessonId = "1";
 
-        string uri = "localhost:3000/Question/Planned/" + LessonId;
+        string uri = "http://localhost:3000/Question/Planned/" + LessonId;
 
         StartCoroutine(GetAllQuestions(uri));
     }
