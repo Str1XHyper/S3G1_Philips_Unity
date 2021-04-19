@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.Networking.PlayerConnection;
+﻿using System;
+using UnityEngine;
 
 public class SocketListener : MonoBehaviour
 {
@@ -17,16 +17,13 @@ public class SocketListener : MonoBehaviour
 
     private void Start()
     {
-        WebSocket websok = new WebSocket("ws://localhost:4000");
+        Uri uri = new Uri("ws://localhost:4000/Mercier");
 
-        websok.OnMessage += (sender, e) => OnMessage(sender, e);
+
+        WebSocket websok = new WebSocket(uri);
 
         websok.Connect();
 
-    }
-
-    public void OnMessage(object sender, MessageEventArgs e )
-    {
-        Debug.Log(e.Data);
+        websok.SendString("Test");
     }
 }
