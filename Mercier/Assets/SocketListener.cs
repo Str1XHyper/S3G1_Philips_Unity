@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
+using WebSocketSharp;
 
 public class SocketListener : MonoBehaviour
 {
@@ -17,13 +19,31 @@ public class SocketListener : MonoBehaviour
 
     private void Start()
     {
-        Uri uri = new Uri("ws://localhost:4000/Mercier");
+        StartCoroutine(ConnectAndTest());
+    }
 
+    private IEnumerator ConnectAndTest()
+    {
+        using (var ws = new WebSocketSharp.WebSocket("ws://localhost:4000/Mercier"))
+        {
+            ws.OnMessage += (sender, e) =>
+                Debug.Log("Laputa says: " + e.Data);
 
-        WebSocket websok = new WebSocket(uri);
+            ws.Connect();
+            ws.Send("Test");
 
-        websok.Connect();
-
-        websok.SendString("Test");
+            bool stop = false;
+            while (!stop)
+            {
+                if (Input.GetKey(KeyCode.P))
+                {
+                    stop = true;
+                }
+                else
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+        }
     }
 }
