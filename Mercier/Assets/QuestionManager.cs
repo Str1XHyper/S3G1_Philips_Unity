@@ -65,10 +65,33 @@ public class QuestionManager : MonoBehaviour
 
     #endregion
 
+    private List<Question> DebugQuestionList()
+    {
+        List<Question> tempList = new List<Question>();
+        Question tempQuestion = new Question()
+        {
+            id = "0",
+            question = "Wat is 10 + 2?",
+            type = "open"
+        };
+
+        tempList.Add(tempQuestion);
+
+        return tempList;
+    }
+
+    public void SendAnswer(string answer)
+    {
+        //Send Answer to Back-End
+    }
+
     public void AskQuestion()
     {
+        allQuestions = DebugQuestionList();
+
         //TODO: Hier vraag op scherm laten zien
-        UI_manager.instance.UpdateQuestion(allQuestions[currentQuestionIndex].question);
+        //UI_manager.instance.UpdateQuestion(allQuestions[currentQuestionIndex].question);
+        UI_manager.instance.ShowQuestionBox(allQuestions[0].question);
 
         //Debug.Log(allQuestions[currentQuestionIndex].question);
 
