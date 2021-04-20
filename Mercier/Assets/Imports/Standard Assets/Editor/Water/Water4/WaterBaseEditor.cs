@@ -56,9 +56,9 @@ namespace UnityStandardAssets.Water
             EditorGUILayout.PropertyField(edgeBlend, new GUIContent("Edge blend?"));
 
             if (waterQuality.intValue > (int)WaterQuality.Low)
-                EditorGUILayout.HelpBox("Water features not supported", MessageType.Warning);
+                EditorGUILayout.HelpBox("Water features not supported", UnityEditor.MessageType.Warning);
             if (edgeBlend.boolValue && !SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.Depth))
-                EditorGUILayout.HelpBox("Edge blend not supported", MessageType.Warning);
+                EditorGUILayout.HelpBox("Edge blend not supported", UnityEditor.MessageType.Warning);
 
             EditorGUILayout.Separator();
 

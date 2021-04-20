@@ -5,11 +5,20 @@ using UnityEngine;
 public class Pawn : MonoBehaviour
 {
     [SerializeField] private int amountOfFramesToGetToNextSpace;
+
+    protected int playerID;
+
     private SmartTile currentSmartTile;
 
     private int movedSpaces = 0;
     private bool isMoving = false;
     private bool choosingDirection = false;
+
+    private void Start()
+    {
+        //Call komen voor id
+        SocketCaller.instance.DiceThrown(new DiceThrow(0, "100"));
+    }
 
     public void MovePawn(int amountToMove)
     {
@@ -114,4 +123,5 @@ public class Pawn : MonoBehaviour
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     public SmartTile CurrentSmartTile { get => currentSmartTile; private set => currentSmartTile = value; }
     public bool ChoosingDirection { get => choosingDirection; set => choosingDirection = value; }
+    public int PlayerID { get => playerID; }
 }
