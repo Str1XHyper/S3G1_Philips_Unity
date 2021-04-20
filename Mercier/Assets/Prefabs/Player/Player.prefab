@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2789698971947684537
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1813,6 +1813,7 @@ GameObject:
   - component: {fileID: 4426924412239112081}
   - component: {fileID: 4426924412239112086}
   - component: {fileID: 4426924412239112087}
+  - component: {fileID: 504205198025316753}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1904,6 +1905,30 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &504205198025316753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4426924412239112085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159cbe6e47893c54fa3edea7803985b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointText: {fileID: 4426924412092051317}
+  starText: {fileID: 4426924412831464215}
+  questionText: {fileID: 6727231607201739920}
+  answerInput: {fileID: 6476162158571893449}
+  questionGroup: {fileID: 134552348958494997}
+  buttonSend: {fileID: 2582822496648373765}
+  buttonContinue: {fileID: 278653052814691064}
+  correctAnswerText: {fileID: 7797219745719167987}
+  InputGroup: {fileID: 27603533092319185}
+  FeedbackGroup: {fileID: 7515115988882509006}
+  FeedbackCorrectBackground: {fileID: 324245990328518860}
+  FeedbackIncorrectBackground: {fileID: 981093239095370410}
 --- !u!1 &4426924412797549034
 GameObject:
   m_ObjectHideFlags: 0
@@ -2490,7 +2515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3588294924798883321
 RectTransform:
   m_ObjectHideFlags: 0
