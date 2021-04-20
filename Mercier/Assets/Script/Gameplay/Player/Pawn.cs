@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pawn : MonoBehaviour
 {
     [SerializeField] private int amountOfFramesToGetToNextSpace;
+    [SerializeField] private Animator animator;
 
     protected int playerID;
 
@@ -81,7 +82,6 @@ public class Pawn : MonoBehaviour
         {
             float interpolairRatio = (float)elapsedFrames / (float)amountOfFramesToGetToNextSpace;
             Vector3 nextLerpedPos = Vector3.Lerp(oldPos, newPos, interpolairRatio);
-
             MovePawnTransform(nextLerpedPos);
 
             yield return new WaitForFixedUpdate();
@@ -124,4 +124,5 @@ public class Pawn : MonoBehaviour
     public SmartTile CurrentSmartTile { get => currentSmartTile; private set => currentSmartTile = value; }
     public bool ChoosingDirection { get => choosingDirection; set => choosingDirection = value; }
     public int PlayerID { get => playerID; }
+    public Animator Animator { get => animator; private set => animator = value; }
 }

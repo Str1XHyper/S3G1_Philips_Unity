@@ -30,6 +30,7 @@ public class Turn
     {
         if (!alreadyMoved)
         {
+            currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward",0.5f);
             RollDice();
             
             //Cheat code TODO: remove at final
@@ -48,6 +49,7 @@ public class Turn
 
     public void EncounterSpace()
     {
+        currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward", 0);
         currentPlayerGroup.GroupPawn.CurrentSmartTile.HandleTile(currentPlayerGroup);
         currentTurnState = TurnState.END;
     }
