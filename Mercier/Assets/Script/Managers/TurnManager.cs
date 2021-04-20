@@ -24,7 +24,7 @@ public class TurnManager : MonoBehaviour
 
     private TurnState lastState = TurnState.START;
 
-    private void StartNewTurn()
+    public void StartNewTurn()
     {
         currentTurn = new Turn(CurrentPlayerGroup);
     }

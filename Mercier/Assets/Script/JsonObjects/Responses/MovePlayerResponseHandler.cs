@@ -11,5 +11,7 @@ public class MovePlayerResponseHandler : ResponseHandler
         base.HandleResponse(socketResponse);
 
         MovePlayerResponse movePlayerResponse = (MovePlayerResponse)socketResponse;
+
+
     }
 }

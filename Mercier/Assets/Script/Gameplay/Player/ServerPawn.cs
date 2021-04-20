@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ServerPawn : Pawn
 {
-    // Start is called before the first frame update
-    void Start()
+    public void MovePawn(int amountOfSpaces)
     {
 
     }
