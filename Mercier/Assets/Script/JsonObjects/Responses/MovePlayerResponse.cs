@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 public class MovePlayerResponse : SocketResponse
 {
-    public MovePlayerResponse(string playerId) : base(playerId)
+    public int movementAmount;
+
+    public MovePlayerResponse(string playerId, int movementAmount) : base(playerId)
     {
         responseType = ResponseType.MOVE_PLAYER;
+        this.movementAmount = movementAmount;
     }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 public class MovePlayerResponseHandler : ResponseHandler
 {
-    public override void HandleResponse(SocketResponse movePlayerResponse)
+    public override void HandleResponse(SocketResponse socketResponse)
     {
-        base.HandleResponse(movePlayerResponse);
-        
+        base.HandleResponse(socketResponse);
 
+        MovePlayerResponse movePlayerResponse = (MovePlayerResponse)socketResponse;
     }
 }
