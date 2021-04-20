@@ -72,7 +72,8 @@ public class QuestionManager : MonoBehaviour
         {
             id = "0",
             question = "Wat is 10 + 2?",
-            type = "open"
+            type = "open",
+            answer = "12"
         };
 
         tempList.Add(tempQuestion);
@@ -80,18 +81,29 @@ public class QuestionManager : MonoBehaviour
         return tempList;
     }
 
-    public void SendAnswer(string answer)
+    public bool SendAnswer(string answer)
     {
+        if(answer ==  allQuestions[0].answer)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+        
         //Send Answer to Back-End
     }
 
     public void AskQuestion()
     {
+        //Debug Question
         allQuestions = DebugQuestionList();
 
         //TODO: Hier vraag op scherm laten zien
         //UI_manager.instance.UpdateQuestion(allQuestions[currentQuestionIndex].question);
-        UI_manager.instance.ShowQuestionBox(allQuestions[0].question);
+        UI_manager.instance.ShowQuestionBox(allQuestions[0]);
 
         //Debug.Log(allQuestions[currentQuestionIndex].question);
 

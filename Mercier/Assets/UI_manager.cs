@@ -25,12 +25,19 @@ public class UI_manager : MonoBehaviour
     [SerializeField] private TMP_Text questionText;
     [SerializeField] private TMP_InputField answerInput;
     [SerializeField] private GameObject questionGroup;
-    [SerializeField] private Button button;
+    [SerializeField] private Button buttonSend;
+    [SerializeField] private Button buttonContinue;
+    [SerializeField] private TMP_Text correctAnswerText;
+    [SerializeField] private GameObject InputGroup;
+    [SerializeField] private GameObject FeedbackGroup;
+    [SerializeField] private GameObject FeedbackCorrectBackground;
+    [SerializeField] private GameObject FeedbackIncorrectBackground;
 
 
     void Start()
     {
-        button.onClick.AddListener(() => SendAnswer());
+        buttonSend.onClick.AddListener(() => SendAnswer());
+        buttonContinue.onClick.AddListener(() => CloseIphone());
     }
 
     public void UpdateText()
@@ -44,27 +51,50 @@ public class UI_manager : MonoBehaviour
         this.questionText.text = questionText;
     }
 
-    public void ShowQuestionBox(string question)
+    public void ShowQuestionBox(Question question)
     {
-        questionText.text = question;
+        questionText.text = question.question;
+        correctAnswerText.text = question.answer;
         questionGroup.gameObject.SetActive(true);
-        
+        InputGroup.gameObject.SetActive(true);
         Debug.Log("trigger UI_Manager");
     }
 
     public void SendAnswer()
     {
-        questionGroup.gameObject.SetActive(false);
+        InputGroup.gameObject.SetActive(false);
+        FeedbackGroup.gameObject.SetActive(true);
+
         string answer = answerInput.text;
 
-        //Send Answer To Back End
-        QuestionManager.instance.SendAnswer(answer);
+        
+        if(QuestionManager.instance.SendAnswer(answer))
+        {
+            // Show Correct Feedback
+            FeedbackCorrectBackground.SetActive(true);
+            FeedbackIncorrectBackground.SetActive(false);
+        }
+        else
+        {
+            // Show Incorrect Feedback
+            FeedbackIncorrectBackground.SetActive(true);
+            FeedbackCorrectBackground.SetActive(false);
+        }
+
+
         answerInput.text = "";
         Debug.Log(answer);
+    }
+
+    private void CloseIphone()
+    {
+        FeedbackGroup.gameObject.SetActive(false);
+        questionGroup.gameObject.SetActive(false);
     }
 
     public TMP_Text PointText { get => pointText; private set => pointText = value; }
     public TMP_Text StarText { get => starText; private set => starText = value; }
     public TMP_Text QuestionText { get => questionText; private set => questionText = value; }
     public TMP_InputField AnswerInput { get => answerInput; private set => answerInput = value; }
+    public TMP_Text CorrectAnswerText { get => correctAnswerText; private set => correctAnswerText = value; }
 }
