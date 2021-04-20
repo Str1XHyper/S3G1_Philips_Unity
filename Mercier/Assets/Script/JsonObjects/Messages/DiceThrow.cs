@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-[Serializable]
+
 public class DiceThrow : SocketMessage
 {
     public string rolledNumber;
-
+    
     public DiceThrow(int playerId, string rolledNumber) : base(playerId)
     {
         messageType = MessageType.DICE_THROW;

@@ -17,7 +17,7 @@ public class Pawn : MonoBehaviour
     private void Start()
     {
         //Call komen voor id
-        SocketCaller.instance.DiceThrown(new DiceThrow("0", "100"));
+        SocketCaller.instance.DiceThrown(new DiceThrow(0, "100"));
     }
 
     public void MovePawn(int amountToMove)

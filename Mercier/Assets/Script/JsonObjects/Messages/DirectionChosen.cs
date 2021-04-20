@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public abstract class DirectionChosen : SocketMessage
+public class DirectionChosen : SocketMessage
 {
     public MovementDirection direction;
 
