@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 public abstract class SocketResponse
 {
     public string playerId;
-    public string responseType;
+    public ResponseType responseType;
 
-    protected SocketResponse(string playerId, string responseType)
+    protected SocketResponse(string playerId)
     {
         this.playerId = playerId;
-        this.responseType = responseType;
     }
 }
