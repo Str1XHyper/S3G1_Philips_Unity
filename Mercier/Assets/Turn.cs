@@ -24,7 +24,6 @@ public class Turn
     public void Start()
     {
         currentTurnState = TurnState.MOVEMENT;
-        currentPlayerGroup.Cam.gameObject.SetActive(true);
     }
 
     public void Movement()
@@ -56,8 +55,6 @@ public class Turn
     public void End()
     {
         currentTurnState = TurnState.QUESTION;
-
-        currentPlayerGroup.Cam.gameObject.SetActive(false);
     }
 
     private void RollDice()
