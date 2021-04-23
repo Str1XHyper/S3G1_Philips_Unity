@@ -115,6 +115,101 @@ namespace Tests
             Assert.AreEqual(Amount, Player.CurrentAmountOfStars, $"Players stars its not equal to {Amount} instead its: {Player.CurrentAmountOfStars}");
         }
 
+        [Test]
+        public void Should_fail_WhenGivingNegtiveStars()
+        {
+            int Amount = 0;
+            Player.GiveMoney(15);
+            Assert.AreEqual(15, Player.CurrentMoneyAmount, $"Players money its not equal to 15 instead its: {Player.CurrentMoneyAmount}");
+            Assert.AreEqual(0, Player.CurrentAmountOfStars, $"Players stars its not equal to 0 instead its: {Player.CurrentAmountOfStars}");
+
+            if (Player.CurrentMoneyAmount >= 5)
+            {
+                Amount = Player.CurrentMoneyAmount / 5;
+                Player.GainStar(-Amount);
+                Player.SubtractMoney(Amount * 5);
+            }
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money its not equal to 0 instead its: {Player.CurrentMoneyAmount}");
+            Assert.AreEqual(Amount, Player.CurrentAmountOfStars, $"Players stars its not equal to {Amount} instead its: {Player.CurrentAmountOfStars}");
+        }
+
+        [Test]
+        public void Should_Fail_When_GivingMoneyToPlayer()
+        {
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money is not equal to 0 instead its {Player.CurrentMoneyAmount}");
+
+            if (int.TryParse("C", out int testNumber))
+            {
+                Player.GiveMoney(testNumber);
+            }
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money is not equal to 9 instead its {Player.CurrentMoneyAmount}");
+        }
+
+        [Test]
+        public void Should_Fail_When_GivingMoneyToPlayerWithADec()
+        {
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money is not equal to 0 instead its {Player.CurrentMoneyAmount}");
+
+            if (int.TryParse("19,2", out int testNumber))
+            {
+                Player.GiveMoney(testNumber);
+            }
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money is not equal to 9 instead its {Player.CurrentMoneyAmount}");
+        }
+
+        [Test]
+        public void Should_fail_WhenGettingAStarWithDecMoney()
+        {
+            int Amount = 0;
+
+            if (int.TryParse("19,2", out int testNumber))
+            {
+                Player.GiveMoney(testNumber);
+            }
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money its not equal to 0 instead its: {Player.CurrentMoneyAmount}");
+            Assert.AreEqual(0, Player.CurrentAmountOfStars, $"Players stars its not equal to 0 instead its: {Player.CurrentAmountOfStars}");
+
+            if (Player.CurrentMoneyAmount >= 5)
+            {
+                Amount = Player.CurrentMoneyAmount / 5;
+                Player.GainStar(Amount);
+                Player.SubtractMoney(Amount * 5);
+            }
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money its not equal to 0 instead its: {Player.CurrentMoneyAmount}");
+            Assert.AreEqual(Amount, Player.CurrentAmountOfStars, $"Players stars its not equal to {Amount} instead its: {Player.CurrentAmountOfStars}");
+        }
+
+
+        [Test]
+        public void Should_fail_WhenGettingAStarWithString()
+        {
+            int Amount = 0;
+
+            if (int.TryParse("DDWE", out int testNumber))
+            {
+                Player.GiveMoney(testNumber);
+            }
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money its not equal to 0 instead its: {Player.CurrentMoneyAmount}");
+            Assert.AreEqual(0, Player.CurrentAmountOfStars, $"Players stars its not equal to 0 instead its: {Player.CurrentAmountOfStars}");
+
+            if (Player.CurrentMoneyAmount >= 5)
+            {
+                Amount = Player.CurrentMoneyAmount / 5;
+                Player.GainStar(Amount);
+                Player.SubtractMoney(Amount * 5);
+            }
+
+            Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money its not equal to 0 instead its: {Player.CurrentMoneyAmount}");
+            Assert.AreEqual(Amount, Player.CurrentAmountOfStars, $"Players stars its not equal to {Amount} instead its: {Player.CurrentAmountOfStars}");
+        }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.
