@@ -14,7 +14,9 @@ public class Pawn : MonoBehaviour
     private int movedSpaces = 0;
     private bool isMoving = false;
     private bool choosingDirection = false;
-    
+
+    Transform characterRotationTransform;
+
     private void Start()
     {
         //Call komen voor id
@@ -76,6 +78,8 @@ public class Pawn : MonoBehaviour
 
     private IEnumerator LerpPawnToNewPos(Vector3 oldPos, Vector3 newPos)
     {
+        characterRotationTransform = GetComponentInChildren<AnimationPositionReseter>().transform;
+
         IsMoving = true;
 
         for (int elapsedFrames = 0; elapsedFrames < amountOfFramesToGetToNextSpace; elapsedFrames++)
@@ -83,6 +87,8 @@ public class Pawn : MonoBehaviour
             float interpolairRatio = (float)elapsedFrames / (float)amountOfFramesToGetToNextSpace;
             Vector3 nextLerpedPos = Vector3.Lerp(oldPos, newPos, interpolairRatio);
             MovePawnTransform(nextLerpedPos);
+
+            characterRotationTransform.LookAt(newPos);
 
             yield return new WaitForFixedUpdate();
         }
