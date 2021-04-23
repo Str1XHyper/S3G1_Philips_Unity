@@ -8,7 +8,7 @@ public class PlayerJoinResponse : SocketResponse
 {
     public int amountOfPlayers;
 
-    protected PlayerJoinResponse(int playerId, int amountOfPlayers) : base(playerId)
+    protected PlayerJoinResponse(string playerId, int amountOfPlayers) : base(playerId)
     {
         this.amountOfPlayers = amountOfPlayers;
         responseType = ResponseType.PLAYER_JOIN;

@@ -16,7 +16,75 @@ public class GroupsManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] private GameObject serverPlayerGroupPrefab;
+
     [SerializeField] private List<PlayerGroup> playerGroupsInGame = new List<PlayerGroup>();
+
+    public void MovePlayer(string id, int amountToMove)
+    {
+        PlayerGroup groupToMove = GetGroupByID(id);
+
+        if (groupToMove != null)
+        {
+            groupToMove.GroupPawn.MovePawn(amountToMove);
+        }
+    }
+
+    public PlayerGroup GetLocalPlayer()
+    {
+        foreach (PlayerGroup playerGroup in playerGroupsInGame)
+        {
+            if (typeof(ClientPawn) == playerGroup.GroupPawn.GetType())
+            {
+                return playerGroup;
+            }
+        }
+
+        return null;
+    }
+
+    public void CreatePlayer(string id)
+    {
+        if (!ContainsID(id))
+        {
+            if (GetLocalPlayer().GroupPawn.PlayerID != id)
+            {
+                GameObject newPlayerGroup = Instantiate(serverPlayerGroupPrefab);
+
+                ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
+
+                serverPawn.SetID(id);
+
+                PlayerGroupsInGame.Add(GetComponent<PlayerGroup>());
+            }
+        }
+    }
+
+    private PlayerGroup GetGroupByID(string id)
+    {
+        foreach (PlayerGroup playerGroup in playerGroupsInGame)
+        {
+            if (playerGroup.GroupPawn.PlayerID == id)
+            {
+                return playerGroup;
+            }
+        }
+
+        return null;
+    }
+
+    private bool ContainsID(string id)
+    {
+        foreach (PlayerGroup playerGroup in playerGroupsInGame)
+        {
+            if (playerGroup.GroupPawn.PlayerID == id)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public List<PlayerGroup> PlayerGroupsInGame { get => playerGroupsInGame; private set => playerGroupsInGame = value; }
 }

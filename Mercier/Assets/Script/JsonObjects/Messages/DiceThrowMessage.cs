@@ -9,7 +9,7 @@ public class DiceThrowMessage : SocketMessage
 {
     public int rolledNumber;
     
-    public DiceThrowMessage(int playerId, int rolledNumber) : base(playerId)
+    public DiceThrowMessage(string playerId, int rolledNumber) : base(playerId)
     {
         messageType = MessageType.DICE_THROW;
         this.rolledNumber = rolledNumber;

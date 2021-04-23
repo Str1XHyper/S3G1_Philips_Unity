@@ -9,7 +9,7 @@ public class ScoreResponse : SocketResponse
     public int Stars;
     public int Points;
 
-    protected ScoreResponse(int playerId, int amountOfStars, int amountOfPoints) : base(playerId)
+    protected ScoreResponse(string playerId, int amountOfStars, int amountOfPoints) : base(playerId)
     {
         responseType = ResponseType.SCORE;
         this.Points = amountOfPoints;

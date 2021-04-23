@@ -8,7 +8,7 @@ public class AnsweredQuestionMessage : SocketMessage
 {
     public string answer;
 
-    public AnsweredQuestionMessage(int playerId, string answer) : base(playerId)
+    public AnsweredQuestionMessage(string playerId, string answer) : base(playerId)
     {
         messageType = MessageType.ANSWERED_QUESTION;
         this.answer = answer;

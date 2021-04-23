@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 [Serializable]
 public class SocketResponse
 {
-    public int playerId;
+    public string playerId;
     public ResponseType responseType;
 
-    protected SocketResponse(int playerId)
+    protected SocketResponse(string playerId)
     {
         this.playerId = playerId;
     }

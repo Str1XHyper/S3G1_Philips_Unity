@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class PassedBankMessage : SocketMessage
 {
-    public PassedBankMessage(int playerId) : base(playerId)
+    public PassedBankMessage(string playerId) : base(playerId)
     {
         messageType = MessageType.PASSED_BANK;
     }

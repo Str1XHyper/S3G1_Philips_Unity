@@ -34,19 +34,35 @@ public class SocketListener : MonoBehaviour
             case ResponseType.SCORE:
                 HandleScore(JsonUtility.FromJson<ScoreResponse>(json));
                 break;
+            case ResponseType.PLAYER_JOIN:
+                HandlePlayerJoin(JsonUtility.FromJson<PlayerJoinResponse>(json));
+                break;
+            case ResponseType.DIRECTION_CHOSEN:
+                HandleDirectionChosenResponse(JsonUtility.FromJson<DirectionChosenResponse>(json));
+                break;
             default:
                 break;
         }
     }
 
+    private void HandleDirectionChosenResponse(DirectionChosenResponse directionChosenResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
+    {
+        GroupsManager.instance.CreatePlayer(playerJoinResponse.playerId);
+    }
+
     private void HandleScore(ScoreResponse scoreResponse)
     {
-        UI_manager.instance.UpdateText();
+        UI_manager.instance.UpdateText(scoreResponse);
     }
 
     private void HandleQuestion(QuestionResponse questionResponse)
     {
-        throw new NotImplementedException();
+        
     }
 
     private void HandleMovePlayer(MovePlayerResponse movePlayerResponse)

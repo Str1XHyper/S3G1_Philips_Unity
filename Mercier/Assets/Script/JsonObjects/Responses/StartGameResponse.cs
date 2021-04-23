@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class StartGameResponse : SocketResponse
 {
-    public StartGameResponse(int playerId) : base(playerId)
+    public StartGameResponse(string playerId) : base(playerId)
     {
         responseType = ResponseType.START_GAME;
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class BoughtStarMessage : SocketMessage
 {
-    public BoughtStarMessage(int playerId) : base(playerId)
+    public BoughtStarMessage(string playerId) : base(playerId)
     {
         messageType = MessageType.BOUGHT_STAR;
     }

@@ -37,6 +37,11 @@ public class SocketCaller : MonoBehaviour
         SendJson(diceThrow);
     }
 
+    public void PlayerJoin(PlayerJoinMessage playerJoin)
+    {
+        SendJson(playerJoin);
+    }
+
     public void EncounterSpace(EncounteredSpaceMessage encounteredSpace)
     {
         SendJson(encounteredSpace);

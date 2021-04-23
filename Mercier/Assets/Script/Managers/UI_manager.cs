@@ -46,6 +46,11 @@ public class UI_manager : MonoBehaviour
         starText.text = "Stars: " + TurnManager.instance.CurrentPlayerGroup.CurrentAmountOfStars.ToString();
     }
 
+    public void UpdateText(ScoreResponse scoreResponse)
+    {
+        //TODO: TIJN fix ff dat hier scores afgehandeld worden per persoon
+    }
+
     public void UpdateQuestion(string questionText)
     {
         this.questionText.text = questionText;

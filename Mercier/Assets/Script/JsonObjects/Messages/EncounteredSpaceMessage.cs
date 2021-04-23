@@ -9,7 +9,7 @@ public class EncounteredSpaceMessage : SocketMessage
 {
     public SpaceType spaceType;
 
-    public EncounteredSpaceMessage(int playerId, SpaceType spaceType) : base(playerId)
+    public EncounteredSpaceMessage(string playerId, SpaceType spaceType) : base(playerId)
     {
         this.spaceType = spaceType;
         messageType = MessageType.ENCOUNTERED_SPACE;

@@ -8,7 +8,7 @@ public class QuestionResponse : SocketResponse
 {
     public Question question;
 
-    public QuestionResponse(int playerId, int questionID) : base(playerId)
+    public QuestionResponse(string playerId, int questionID) : base(playerId)
     {
         responseType = ResponseType.QUESTION;
     }

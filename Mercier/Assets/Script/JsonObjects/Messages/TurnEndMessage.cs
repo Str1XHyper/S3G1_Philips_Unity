@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 [Serializable]
 public class TurnEndMessage : SocketMessage
 {
-    public TurnEndMessage(int playerId) : base(playerId)
+    public TurnEndMessage(string playerId) : base(playerId)
     {
         messageType = MessageType.TURN_END;
     }

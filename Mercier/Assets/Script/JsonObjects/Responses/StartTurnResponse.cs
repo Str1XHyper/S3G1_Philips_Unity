@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class StartTurnResponse : SocketResponse
 {
-    public StartTurnResponse(int playerId) : base(playerId)
+    public StartTurnResponse(string playerId) : base(playerId)
     {
         responseType = ResponseType.START_TURN;
     }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 public class PlayerJoinMessage : SocketMessage
 {
-    public PlayerJoinMessage(int playerId) : base(playerId)
+    public PlayerJoinMessage(string playerId) : base(playerId)
     {
         messageType = MessageType.PLAYER_JOIN;
-        this.playerId = -1;
+        this.playerId = playerId;
     }
 }
