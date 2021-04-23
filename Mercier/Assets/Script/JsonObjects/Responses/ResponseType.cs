@@ -3,5 +3,6 @@
     START_GAME,
     START_TURN,
     MOVE_PLAYER,
-    QUESTION
+    QUESTION,
+    SCORE
 }

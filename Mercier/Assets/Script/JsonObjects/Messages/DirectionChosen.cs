@@ -8,7 +8,7 @@ public class DirectionChosen : SocketMessage
 {
     public MovementDirection direction;
 
-    protected DirectionChosen(int playerId, MovementDirection direction) : base(playerId)
+    public DirectionChosen(int playerId, MovementDirection direction) : base(playerId)
     {
         this.direction = direction;
 

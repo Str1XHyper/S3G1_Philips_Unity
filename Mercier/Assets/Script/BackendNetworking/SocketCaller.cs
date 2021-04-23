@@ -52,6 +52,15 @@ public class SocketCaller : MonoBehaviour
         SendJson(directionChosen);
     }
 
+    public void PassedStart(PassedStart passedStart)
+    {
+        SendJson(passedStart);
+    }
+    public void PassedBank(PassedBank PassedBank)
+    {
+        SendJson(PassedBank);
+    }
+
     public void BoughtStar(BoughtStar boughtStar)
     {
         SendJson(boughtStar);
