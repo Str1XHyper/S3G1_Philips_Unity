@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 public class DiceThrow : SocketMessage
 {
-    public string rolledNumber;
+    public int rolledNumber;
     
-    public DiceThrow(int playerId, string rolledNumber) : base(playerId)
+    public DiceThrow(int playerId, int rolledNumber) : base(playerId)
     {
         messageType = MessageType.DICE_THROW;
         this.rolledNumber = rolledNumber;

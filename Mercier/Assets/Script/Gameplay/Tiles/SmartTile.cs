@@ -16,6 +16,8 @@ public class SmartTile : MonoBehaviour
     private bool moveToNextTile = true;
     private bool starOnTile = false;
 
+    private SpaceType tileType;
+
     private void Awake()
     {
         star = GetComponentInChildren<Star>();
@@ -62,4 +64,6 @@ public class SmartTile : MonoBehaviour
     public bool OnPassingTriggerTile { get; internal set; }
     public bool MoveToNextTile { get => moveToNextTile; set => moveToNextTile = value; }
     public Star Star { get => star; private set => star = value; }
+
+    public SpaceType TileType { get => tileType; set => tileType = value; }
 }

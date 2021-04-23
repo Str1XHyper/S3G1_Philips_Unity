@@ -11,6 +11,12 @@ public class ChooseDirectionTile : SmartTile
     [SerializeField] private MovementDirection alternateDirection;
     [SerializeField] private MovementDirection defaultDirection;
 
+    new private void Start()
+    {
+        base.Start();
+
+        TileType = SpaceType.CHOOSE_DIRECTION;
+    }
 
     public override void HandlePassingTile(PlayerGroup currentPlayerGroup)
     {

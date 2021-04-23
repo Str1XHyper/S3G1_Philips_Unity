@@ -5,6 +5,12 @@ using UnityEngine;
 public class MoneyGainTile : SmartTile
 {
     private const int AmountToGain = 3;
+    new private void Start()
+    {
+        base.Start();
+
+        TileType = SpaceType.GAIN_POINTS;
+    }
 
     public override void HandleTile(PlayerGroup currentPlayerGroup)
     {

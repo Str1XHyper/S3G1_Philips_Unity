@@ -9,6 +9,13 @@ public class BankTile : SmartTile
 
     private int moneyInBank = 0;
 
+    new private void Start()
+    {
+        base.Start();
+
+        TileType = SpaceType.BANK;
+    }
+
     public override void HandleTile(PlayerGroup currentPlayerGroup)
     {
         base.HandleTile(currentPlayerGroup);

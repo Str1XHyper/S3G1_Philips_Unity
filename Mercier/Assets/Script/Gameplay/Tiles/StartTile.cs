@@ -6,6 +6,13 @@ public class StartTile : SmartTile
 {
     private const int MoneyGainWhenPassingStart = 2;
 
+    new private void Start()
+    {
+        base.Start();
+
+        TileType = SpaceType.START;
+    }
+
     public override void HandleTile(PlayerGroup currentPlayerGroup)
     {
         base.HandleTile(currentPlayerGroup);
