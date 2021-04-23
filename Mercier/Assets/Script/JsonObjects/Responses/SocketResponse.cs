@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-public abstract class SocketResponse
+public class SocketResponse
 {
-    public string playerId;
+    public int playerId;
     public ResponseType responseType;
 
-    protected SocketResponse(string playerId)
+    protected SocketResponse(int playerId)
     {
         this.playerId = playerId;
     }

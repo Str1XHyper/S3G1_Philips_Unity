@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 public class QuestionResponse : SocketResponse
 {
-    public QuestionResponse(string playerId) : base(playerId)
+    public Question question;
+
+    public QuestionResponse(int playerId, int questionID) : base(playerId)
     {
         responseType = ResponseType.QUESTION;
     }

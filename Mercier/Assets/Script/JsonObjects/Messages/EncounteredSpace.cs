@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 [Serializable]
 public class EncounteredSpace : SocketMessage
 {
-    public string spaceType;
+    public SpaceType spaceType;
 
-    public EncounteredSpace(int playerId,string spaceType) : base(playerId)
+    public EncounteredSpace(int playerId, SpaceType spaceType) : base(playerId)
     {
         this.spaceType = spaceType;
         messageType = MessageType.ENCOUNTERED_SPACE;

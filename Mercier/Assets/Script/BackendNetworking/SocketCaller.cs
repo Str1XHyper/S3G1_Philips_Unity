@@ -42,6 +42,21 @@ public class SocketCaller : MonoBehaviour
         SendJson(encounteredSpace);
     }
 
+    public void AnsweredQuestion(AnsweredQuestion answeredQuestion)
+    {
+        SendJson(answeredQuestion);
+    }
+
+    public void DirectionChosen(DirectionChosen directionChosen)
+    {
+        SendJson(directionChosen);
+    }
+
+    public void BoughtStar(BoughtStar boughtStar)
+    {
+        SendJson(boughtStar);
+    }
+
     public void EndTurn(TurnEnd turnEnd)
     {
         SendJson(turnEnd);

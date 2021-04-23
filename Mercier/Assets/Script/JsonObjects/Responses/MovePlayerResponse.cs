@@ -8,7 +8,7 @@ public class MovePlayerResponse : SocketResponse
 {
     public int movementAmount;
 
-    public MovePlayerResponse(string playerId, int movementAmount) : base(playerId)
+    public MovePlayerResponse(int playerId, int movementAmount) : base(playerId)
     {
         responseType = ResponseType.MOVE_PLAYER;
         this.movementAmount = movementAmount;

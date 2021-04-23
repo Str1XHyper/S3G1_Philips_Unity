@@ -49,8 +49,11 @@ public class Turn
 
     public void EncounterSpace()
     {
+        SmartTile currentTile = currentPlayerGroup.GroupPawn.CurrentSmartTile;
         currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward", 0);
-        currentPlayerGroup.GroupPawn.CurrentSmartTile.HandleTile(currentPlayerGroup);
+        currentTile.HandleTile(currentPlayerGroup);
+
+        SocketCaller.instance.EncounterSpace(new EncounteredSpace(currentPlayerGroup.GroupPawn.PlayerID, currentTile.TileType));
 
         currentTurnState = TurnState.END;
     }
@@ -66,11 +69,6 @@ public class Turn
     {
         rolledNumber = DiceRoller.instance.GetRandomNumber();
         SocketCaller.instance.DiceThrown(new DiceThrow(0, rolledNumber));
-    }
-
-    private EncounteredSpace GetNewEncounteredSpace(PlayerGroup playerGroup, SmartTile currentTile)
-    {
-        EncounteredSpace toReturn = new EncounteredSpace(playerGroup.GroupPawn.PlayerID, currentTile.TileType);
     }
 
     public TurnState CurrentTurnState { get => currentTurnState; private set => currentTurnState = value; }
