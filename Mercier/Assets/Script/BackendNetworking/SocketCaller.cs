@@ -32,41 +32,41 @@ public class SocketCaller : MonoBehaviour
         connection.Send(json);
     }
 
-    public void DiceThrown(DiceThrow diceThrow)
+    public void DiceThrown(DiceThrowMessage diceThrow)
     {
         SendJson(diceThrow);
     }
 
-    public void EncounterSpace(EncounteredSpace encounteredSpace)
+    public void EncounterSpace(EncounteredSpaceMessage encounteredSpace)
     {
         SendJson(encounteredSpace);
     }
 
-    public void AnsweredQuestion(AnsweredQuestion answeredQuestion)
+    public void AnsweredQuestion(AnsweredQuestionMessage answeredQuestion)
     {
         SendJson(answeredQuestion);
     }
 
-    public void DirectionChosen(DirectionChosen directionChosen)
+    public void DirectionChosen(DirectionChosenMessage directionChosen)
     {
         SendJson(directionChosen);
     }
 
-    public void PassedStart(PassedStart passedStart)
+    public void PassedStart(PassedStartMessage passedStart)
     {
         SendJson(passedStart);
     }
-    public void PassedBank(PassedBank PassedBank)
+    public void PassedBank(PassedBankMessage PassedBank)
     {
         SendJson(PassedBank);
     }
 
-    public void BoughtStar(BoughtStar boughtStar)
+    public void BoughtStar(BoughtStarMessage boughtStar)
     {
         SendJson(boughtStar);
     }
 
-    public void EndTurn(TurnEnd turnEnd)
+    public void EndTurn(TurnEndMessage turnEnd)
     {
         SendJson(turnEnd);
     }

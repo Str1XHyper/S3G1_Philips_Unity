@@ -28,7 +28,7 @@ public class BankTile : SmartTile
         
         if (currentPlayerGroup.GroupPawn.MovedSpaces > 0)
         {
-            SocketCaller.instance.PassedBank(new PassedBank(currentPlayerGroup.GroupPawn.PlayerID));
+            SocketCaller.instance.PassedBank(new PassedBankMessage(currentPlayerGroup.GroupPawn.PlayerID));
             GiveMoneyToBank(currentPlayerGroup);
         }
 

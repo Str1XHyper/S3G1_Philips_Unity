@@ -24,7 +24,7 @@ public class StartTile : SmartTile
 
         currentPlayerGroup.GiveMoney(MoneyGainWhenPassingStart);
 
-        SocketCaller.instance.PassedStart(new PassedStart(currentPlayerGroup.GroupPawn.PlayerID));
+        SocketCaller.instance.PassedStart(new PassedStartMessage(currentPlayerGroup.GroupPawn.PlayerID));
 
         Debug.Log("You passed start and gained " + MoneyGainWhenPassingStart + " money. New balance is " + currentPlayerGroup.CurrentMoneyAmount);
     }

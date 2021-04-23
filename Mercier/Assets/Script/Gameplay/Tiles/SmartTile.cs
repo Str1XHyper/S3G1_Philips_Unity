@@ -51,7 +51,7 @@ public class SmartTile : MonoBehaviour
                 Debug.Log("You bought a star for " + payedAmount + ".");
                 Debug.Log("New balance is " + currentPlayerGroup.CurrentMoneyAmount);
 
-                SocketCaller.instance.BoughtStar(new BoughtStar(currentPlayerGroup.GroupPawn.PlayerID));
+                SocketCaller.instance.BoughtStar(new BoughtStarMessage(currentPlayerGroup.GroupPawn.PlayerID));
 
                 UI_manager.instance.UpdateText();
 

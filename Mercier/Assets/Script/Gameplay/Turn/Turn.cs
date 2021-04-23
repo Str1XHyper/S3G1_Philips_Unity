@@ -53,14 +53,14 @@ public class Turn
         currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward", 0);
         currentTile.HandleTile(currentPlayerGroup);
 
-        SocketCaller.instance.EncounterSpace(new EncounteredSpace(currentPlayerGroup.GroupPawn.PlayerID, currentTile.TileType));
+        SocketCaller.instance.EncounterSpace(new EncounteredSpaceMessage(currentPlayerGroup.GroupPawn.PlayerID, currentTile.TileType));
 
         currentTurnState = TurnState.END;
     }
 
     public void End()
     {
-        SocketCaller.instance.EndTurn(new TurnEnd(currentPlayerGroup.GroupPawn.PlayerID));
+        SocketCaller.instance.EndTurn(new TurnEndMessage(currentPlayerGroup.GroupPawn.PlayerID));
 
         currentTurnState = TurnState.QUESTION;
     }
@@ -68,7 +68,7 @@ public class Turn
     private void RollDice()
     {
         rolledNumber = DiceRoller.instance.GetRandomNumber();
-        SocketCaller.instance.DiceThrown(new DiceThrow(0, rolledNumber));
+        SocketCaller.instance.DiceThrown(new DiceThrowMessage(0, rolledNumber));
     }
 
     public TurnState CurrentTurnState { get => currentTurnState; private set => currentTurnState = value; }

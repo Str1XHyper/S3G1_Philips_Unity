@@ -14,25 +14,53 @@ public class SocketListener : MonoBehaviour
 
     public void OnMessage(object sender, MessageEventArgs e)
     {
-        SocketResponse response = ConvertToSocketResponse(e.Data);
+        string json = e.Data;
+        SocketResponse response = JsonUtility.FromJson<SocketResponse>(json);
 
         switch (response.responseType)
         {
             case ResponseType.START_GAME:
+                HandleStartGame(JsonUtility.FromJson<StartGameResponse>(json));
                 break;
             case ResponseType.START_TURN:
+                HandleStartTurn(JsonUtility.FromJson<StartTurnResponse>(json));
                 break;
             case ResponseType.MOVE_PLAYER:
+                HandleMovePlayer(JsonUtility.FromJson<MovePlayerResponse>(json));
                 break;
             case ResponseType.QUESTION:
+                HandleQuestion(JsonUtility.FromJson<QuestionResponse>(json));
+                break;
+            case ResponseType.SCORE:
+                HandleScore(JsonUtility.FromJson<ScoreResponse>(json));
                 break;
             default:
                 break;
         }
     }
 
-    private SocketResponse ConvertToSocketResponse(string json)
+    private void HandleScore(ScoreResponse scoreResponse)
     {
-        return JsonUtility.FromJson<SocketResponse>(json);
+        UI_manager.instance.UpdateText();
+    }
+
+    private void HandleQuestion(QuestionResponse questionResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandleMovePlayer(MovePlayerResponse movePlayerResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandleStartTurn(StartTurnResponse startTurnResponse)
+    {
+        throw new NotImplementedException();
+    }
+
+    private void HandleStartGame(StartGameResponse startGameResponse)
+    {
+        throw new NotImplementedException();
     }
 }
