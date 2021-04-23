@@ -28,9 +28,17 @@ public class ChooseDirectionTile : SmartTile
     {
         currentPlayerGroup.GroupPawn.ChoosingDirection = true;
 
-        StartCoroutine(ChooseDirectionPrompt(currentPlayerGroup));
+        if (GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID == currentPlayerGroup.GroupPawn.PlayerID)
+        {
+            StartCoroutine(ChooseDirectionPrompt(currentPlayerGroup));
+        }
+        else
+        {
+            //TODO: Wait for server to tell direction
+        }
 
         Debug.Log("Choose " + defaultDirection + " or " + alternateDirection);
+
         UI_manager.instance.UpdateText();
     }
 

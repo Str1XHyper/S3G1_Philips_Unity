@@ -62,12 +62,12 @@ public class SocketListener : MonoBehaviour
 
     private void HandleQuestion(QuestionResponse questionResponse)
     {
-        
+        throw new NotImplementedException();
     }
 
     private void HandleMovePlayer(MovePlayerResponse movePlayerResponse)
     {
-        throw new NotImplementedException();
+        GroupsManager.instance.MovePlayer(movePlayerResponse.playerId, movePlayerResponse.movementAmount);
     }
 
     private void HandleStartTurn(StartTurnResponse startTurnResponse)
