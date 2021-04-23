@@ -36,7 +36,10 @@ public class PlayerGroup : MonoBehaviour
 
     public void GiveMoney(int moneysToGain)
     {
-        currentAmountMoney += moneysToGain;
+        if (moneysToGain > 0)
+        {
+            currentAmountMoney += moneysToGain;
+        }
     }
 
     public void GainStar(int amountOfGainedStars)
