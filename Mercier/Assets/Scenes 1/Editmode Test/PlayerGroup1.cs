@@ -16,7 +16,13 @@ public class PlayerGroup : MonoBehaviour
     /// <returns>Amount that was subtracted</returns>
     public int SubtractMoney(int tax)
     {
-        if (currentAmountMoney > tax)
+        if(tax < 0)
+        {
+            tax = 0;
+            currentAmountMoney -= tax;
+            return tax;
+        }
+        else if (currentAmountMoney > tax)
         {
             currentAmountMoney -= tax;
             return tax;
@@ -44,7 +50,10 @@ public class PlayerGroup : MonoBehaviour
 
     public void GainStar(int amountOfGainedStars)
     {
-        currentAmountOfStars += amountOfGainedStars;
+        if (amountOfGainedStars > 0)
+        {
+            currentAmountOfStars += amountOfGainedStars;
+        }
     }
 
     public int CurrentMoneyAmount { get => currentAmountMoney; private set => currentAmountMoney = value; }

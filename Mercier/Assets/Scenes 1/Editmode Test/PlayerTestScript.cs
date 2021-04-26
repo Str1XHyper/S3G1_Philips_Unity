@@ -131,7 +131,7 @@ namespace Tests
             }
 
             Assert.AreEqual(0, Player.CurrentMoneyAmount, $"Players money its not equal to 0 instead its: {Player.CurrentMoneyAmount}");
-            Assert.AreEqual(Amount, Player.CurrentAmountOfStars, $"Players stars its not equal to {Amount} instead its: {Player.CurrentAmountOfStars}");
+            Assert.AreEqual(0, Player.CurrentAmountOfStars, $"Players stars its not equal to 0 instead its: {Player.CurrentAmountOfStars}");
         }
 
         [Test]
