@@ -61,6 +61,7 @@ public class TurnManager : MonoBehaviour
                     EndOfTurn();
                     break;
                 case TurnState.QUESTION:
+                      //CameraManager.instance.ChangeCameraTarget( INSERT TARGET HERE );
                     break;
                 default:
                     break;

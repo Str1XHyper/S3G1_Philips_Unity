@@ -51,4 +51,5 @@ public class StarPlacer : MonoBehaviour
         tileToPlaceStarOn.StarOnTile = true;
         tileToPlaceStarOn.Star.SpawnStar();
     }
+
 }
