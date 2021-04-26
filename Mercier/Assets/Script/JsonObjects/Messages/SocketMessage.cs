@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 [Serializable]
 public abstract class SocketMessage
 {
-    public int playerId;
+    public string playerId;
     public MessageType messageType;
 
-    protected SocketMessage(int playerId)
+    protected SocketMessage(string playerId)
     {
         this.playerId = playerId;
     }

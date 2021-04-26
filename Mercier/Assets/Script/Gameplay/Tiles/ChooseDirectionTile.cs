@@ -11,6 +11,12 @@ public class ChooseDirectionTile : SmartTile
     [SerializeField] private MovementDirection alternateDirection;
     [SerializeField] private MovementDirection defaultDirection;
 
+    new private void Start()
+    {
+        base.Start();
+
+        TileType = SpaceType.CHOOSE_DIRECTION;
+    }
 
     public override void HandlePassingTile(PlayerGroup currentPlayerGroup)
     {
@@ -31,22 +37,40 @@ public class ChooseDirectionTile : SmartTile
     private IEnumerator ChooseDirectionPrompt(PlayerGroup currentPlayerGroup)
     {
         float timePassed = 0;
+        bool directionIsChosen = false;
 
         while (timePassed <= MaxWaitingTime)
         {
             if (DirectionPressed(defaultDirection))
             {
                 MoveToNextTile = true;
+
+                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, defaultDirection));
+                directionIsChosen = true;
                 break;
             }
             else if (DirectionPressed(alternateDirection))
             {
                 MoveToNextTile = false;
+                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, alternateDirection));
+                directionIsChosen = true;
                 break;
             }
 
             timePassed += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
+        }
+
+        if (!directionIsChosen)
+        {
+            if (Random.Range(0,2) == 1)
+            {
+                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, defaultDirection));
+            }
+            else
+            {
+                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, alternateDirection));
+            }
         }
 
         currentPlayerGroup.GroupPawn.ChoosingDirection = false;

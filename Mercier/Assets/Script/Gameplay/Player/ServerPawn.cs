@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ServerPawn : Pawn
 {
-    // Start is called before the first frame update
-    void Start()
+    public void SetID(string id)
     {
-
+        playerID = id;
     }
 }

@@ -7,7 +7,7 @@ public class Pawn : MonoBehaviour
     [SerializeField] private int amountOfFramesToGetToNextSpace;
     [SerializeField] private Animator animator;
 
-    protected int playerID;
+    protected string playerID;
 
     private SmartTile currentSmartTile;
 
@@ -20,7 +20,8 @@ public class Pawn : MonoBehaviour
     private void Start()
     {
         //Call komen voor id
-        SocketCaller.instance.DiceThrown(new DiceThrow(0, "100"));
+        // SocketCaller.instance.DiceThrown(new DiceThrow(0, "100"));
+        //GroupsManager.instance.CreatePlayer(0);
     }
 
     public void MovePawn(int amountToMove)
@@ -129,6 +130,6 @@ public class Pawn : MonoBehaviour
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     public SmartTile CurrentSmartTile { get => currentSmartTile; private set => currentSmartTile = value; }
     public bool ChoosingDirection { get => choosingDirection; set => choosingDirection = value; }
-    public int PlayerID { get => playerID; }
+    public string PlayerID { get => playerID; }
     public Animator Animator { get => animator; private set => animator = value; }
 }

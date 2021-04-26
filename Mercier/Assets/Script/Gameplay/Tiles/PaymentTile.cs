@@ -6,6 +6,13 @@ public class PaymentTile : SmartTile
 {
     private const int PayUpAmount = 3;
 
+    new private void Start()
+    {
+        base.Start();
+
+        TileType = SpaceType.LOSE_POINTS;
+    }
+
     public override void HandleTile(PlayerGroup currentPlayerGroup)
     {
         base.HandleTile(currentPlayerGroup);

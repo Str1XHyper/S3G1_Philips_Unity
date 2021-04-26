@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [Serializable]
-public abstract class SocketResponse
+public class SocketResponse
 {
     public string playerId;
     public ResponseType responseType;

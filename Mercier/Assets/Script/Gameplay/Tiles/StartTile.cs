@@ -6,6 +6,13 @@ public class StartTile : SmartTile
 {
     private const int MoneyGainWhenPassingStart = 2;
 
+    new private void Start()
+    {
+        base.Start();
+
+        TileType = SpaceType.START;
+    }
+
     public override void HandleTile(PlayerGroup currentPlayerGroup)
     {
         base.HandleTile(currentPlayerGroup);
@@ -16,6 +23,8 @@ public class StartTile : SmartTile
         base.HandlePassingTile(currentPlayerGroup);
 
         currentPlayerGroup.GiveMoney(MoneyGainWhenPassingStart);
+
+        SocketCaller.instance.PassedStart(new PassedStartMessage(currentPlayerGroup.GroupPawn.PlayerID));
 
         Debug.Log("You passed start and gained " + MoneyGainWhenPassingStart + " money. New balance is " + currentPlayerGroup.CurrentMoneyAmount);
     }
