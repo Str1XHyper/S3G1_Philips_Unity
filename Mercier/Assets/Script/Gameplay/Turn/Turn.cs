@@ -68,7 +68,7 @@ public class Turn
     private void RollDice()
     {
         rolledNumber = DiceRoller.instance.GetRandomNumber();
-        SocketCaller.instance.DiceThrown(new DiceThrowMessage(0, rolledNumber));
+        SocketCaller.instance.DiceThrown(new DiceThrowMessage(currentPlayerGroup.GroupPawn.PlayerID, rolledNumber));
     }
 
     public TurnState CurrentTurnState { get => currentTurnState; private set => currentTurnState = value; }
