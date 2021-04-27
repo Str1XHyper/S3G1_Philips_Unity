@@ -47,12 +47,18 @@ public class SocketListener : MonoBehaviour
 
     private void HandleDirectionChosenResponse(DirectionChosenResponse directionChosenResponse)
     {
-        throw new NotImplementedException();
+        PlayerGroup group = GroupsManager.instance.GetGroupByID(directionChosenResponse.playerId);
+        ChooseDirectionTile tileToSet = (ChooseDirectionTile)group.GroupPawn.CurrentSmartTile;
+
+        tileToSet.SetChosenDirection(group, directionChosenResponse.ChosenDirection);
     }
 
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
-        GroupsManager.instance.CreatePlayer(playerJoinResponse.playerId);
+        foreach (string player in playerJoinResponse.amountOfPlayers)
+        {
+            GroupsManager.instance.CreatePlayer(player);
+        }
     }
 
     private void HandleScore(ScoreResponse scoreResponse)
@@ -62,7 +68,7 @@ public class SocketListener : MonoBehaviour
 
     private void HandleQuestion(QuestionResponse questionResponse)
     {
-        throw new NotImplementedException();
+
     }
 
     private void HandleMovePlayer(MovePlayerResponse movePlayerResponse)
@@ -72,11 +78,11 @@ public class SocketListener : MonoBehaviour
 
     private void HandleStartTurn(StartTurnResponse startTurnResponse)
     {
-        throw new NotImplementedException();
+
     }
 
     private void HandleStartGame(StartGameResponse startGameResponse)
     {
-        throw new NotImplementedException();
+
     }
 }

@@ -11,7 +11,7 @@ public class Turn
 
     private int rolledNumber = 0;
 
-    private bool alreadyMoved = false;
+    private bool alreadyStartedMoved = false;
 
     private PlayerGroup currentPlayerGroup;
 
@@ -28,21 +28,20 @@ public class Turn
 
     public void Movement()
     {
-        if (!alreadyMoved)
+        if (!alreadyStartedMoved)
         {
-            currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward",0.5f);
             RollDice();
             
             //Cheat code TODO: remove at final
             if (Input.GetKey(KeyCode.Alpha1))
                 rolledNumber = 1;
 
-            currentPlayerGroup.GroupPawn.MovePawn(rolledNumber);
-            alreadyMoved = true;
+            alreadyStartedMoved = true;
         }
 
-        if (currentPlayerGroup.GroupPawn.MovedSpaces >= rolledNumber && alreadyMoved)
+        if (currentPlayerGroup.GroupPawn.DoneMoving && alreadyStartedMoved)
         {
+            currentPlayerGroup.GroupPawn.DoneMoving = false;
             currentTurnState = TurnState.ENCOUNTER_SPACE;
         }
     }
@@ -68,7 +67,7 @@ public class Turn
     private void RollDice()
     {
         rolledNumber = DiceRoller.instance.GetRandomNumber();
-        SocketCaller.instance.DiceThrown(new DiceThrowMessage(0, rolledNumber));
+        SocketCaller.instance.DiceThrown(new DiceThrowMessage(currentPlayerGroup.GroupPawn.PlayerID, rolledNumber));
     }
 
     public TurnState CurrentTurnState { get => currentTurnState; private set => currentTurnState = value; }

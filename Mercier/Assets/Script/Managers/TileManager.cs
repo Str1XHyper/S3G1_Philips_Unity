@@ -46,5 +46,37 @@ public class TileManager : MonoBehaviour
         return tiles[0];
     }
 
+
+    public SmartTile CheckForAlternateDirectionPortalTile(SmartTile currentSmartTile, SmartTile tileToMoveTo)
+    {
+        if (currentSmartTile.GetType() == typeof(PortalTile))
+        {
+            if (!currentSmartTile.MoveToNextTile)
+            {
+                PortalTile portalTile = (PortalTile)currentSmartTile;
+                tileToMoveTo = portalTile.AlternateNextTile;
+                currentSmartTile.MoveToNextTile = true;
+            }
+        }
+
+        return tileToMoveTo;
+    }
+
+    public SmartTile GetCorrectDirectionFromDirectionTile(SmartTile currentSmartTile, SmartTile tileToMoveTo)
+    {
+        if (currentSmartTile.GetType() == typeof(ChooseDirectionTile))
+        {
+            ChooseDirectionTile directionTile = (ChooseDirectionTile)currentSmartTile;
+
+            if (currentSmartTile.MoveToNextTile)
+            {
+                tileToMoveTo = directionTile.AlternateNextTile;
+            }
+        }
+
+        return tileToMoveTo;
+    }
+
+
     public List<SmartTile> Tiles { get => tiles; set => tiles = value; }
 }

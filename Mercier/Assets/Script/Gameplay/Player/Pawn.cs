@@ -10,26 +10,34 @@ public class Pawn : MonoBehaviour
     protected string playerID;
 
     private SmartTile currentSmartTile;
+    private Transform characterRotationTransform;
 
-    private int movedSpaces = 0;
     private bool isMoving = false;
+    private bool doneMoving = false;
     private bool choosingDirection = false;
+    private int currentAmountToMove = 0;
+    private int amountAlreadyMoved = 0;
 
-    Transform characterRotationTransform;
-
-    private void Start()
+    private void Update()
     {
-        //Call komen voor id
-        // SocketCaller.instance.DiceThrown(new DiceThrow(0, "100"));
-        //GroupsManager.instance.CreatePlayer(0);
+        if (currentAmountToMove > 0)
+        {
+            if (!isMoving && !choosingDirection)
+            {
+                currentAmountToMove--;
+                MovePawnToNextSpace();
+            }
+        }
     }
 
     public void MovePawn(int amountToMove)
     {
-        StartCoroutine(MovePawnMultipleSpaces(amountToMove));
+        HandlePassingATile(currentSmartTile);
+        amountAlreadyMoved = 0;
+        currentAmountToMove = amountToMove;
     }
 
-    public void MovePawnToTile(SmartTile tileToMoveTo)
+    public void MovePawnDirectlyToTile(SmartTile tileToMoveTo)
     {
         currentSmartTile = tileToMoveTo;
         MovePawnTransform(currentSmartTile.PawnPos);
@@ -39,42 +47,14 @@ public class Pawn : MonoBehaviour
     {
         SmartTile tileToMoveTo = currentSmartTile.NextTile;
 
-        tileToMoveTo = CheckDirectionTile(tileToMoveTo);
-        tileToMoveTo = CheckPortalTile(tileToMoveTo);
+        tileToMoveTo = TileManager.instance.GetCorrectDirectionFromDirectionTile(currentSmartTile, tileToMoveTo);
+        tileToMoveTo = TileManager.instance.CheckForAlternateDirectionPortalTile(currentSmartTile, tileToMoveTo);
+
+        HandlePassingATile(tileToMoveTo);
 
         StartCoroutine(LerpPawnToNewPos(currentSmartTile.PawnPos, tileToMoveTo.PawnPos));
 
         currentSmartTile = tileToMoveTo;
-    }
-
-    private SmartTile CheckPortalTile(SmartTile tileToMoveTo)
-    {
-        if (currentSmartTile.GetType() == typeof(PortalTile))
-        {
-            if (!currentSmartTile.MoveToNextTile)
-            {
-                PortalTile portalTile = (PortalTile)currentSmartTile;
-                tileToMoveTo = portalTile.AlternateNextTile;
-                currentSmartTile.MoveToNextTile = true;
-            }
-        }
-
-        return tileToMoveTo;
-    }
-
-    private SmartTile CheckDirectionTile(SmartTile tileToMoveTo)
-    {
-        if (currentSmartTile.GetType() == typeof(ChooseDirectionTile))
-        {
-            ChooseDirectionTile directionTile = (ChooseDirectionTile)currentSmartTile;
-
-            if (currentSmartTile.MoveToNextTile)
-            {
-                tileToMoveTo = directionTile.AlternateNextTile;
-            }
-        }
-
-        return tileToMoveTo;
     }
 
     private IEnumerator LerpPawnToNewPos(Vector3 oldPos, Vector3 newPos)
@@ -82,54 +62,56 @@ public class Pawn : MonoBehaviour
         characterRotationTransform = GetComponentInChildren<AnimationPositionReseter>().transform;
 
         IsMoving = true;
+        TurnManager.instance.CurrentPlayerGroup.GroupPawn.animator.SetFloat("Forward", 0.5f);
 
         for (int elapsedFrames = 0; elapsedFrames < amountOfFramesToGetToNextSpace; elapsedFrames++)
         {
-            float interpolairRatio = (float)elapsedFrames / (float)amountOfFramesToGetToNextSpace;
-            Vector3 nextLerpedPos = Vector3.Lerp(oldPos, newPos, interpolairRatio);
-            MovePawnTransform(nextLerpedPos);
-
-            characterRotationTransform.LookAt(newPos);
+            MovePawnToNextLerpPos(oldPos, newPos, elapsedFrames);
 
             yield return new WaitForFixedUpdate();
         }
+
+        CheckForLastTile();
 
         MovePawnTransform(newPos);
-        movedSpaces++;
+
         IsMoving = false;
+        amountAlreadyMoved++;
     }
 
-    private void HandlePassingOfTile()
+    private void HandlePassingATile(SmartTile tileToPass)
     {
-        currentSmartTile.HandlePassingTile(TurnManager.instance.CurrentPlayerGroup);
-    }
-
-    private IEnumerator MovePawnMultipleSpaces(int amountOfSpaces)
-    {
-        movedSpaces = 0;
-
-        HandlePassingOfTile();
-
-        while (movedSpaces < amountOfSpaces)
+        if (currentAmountToMove > 0)
         {
-            if (!IsMoving && !choosingDirection)
-            {
-                MovePawnToNextSpace();
-
-                if (movedSpaces < amountOfSpaces)
-                    HandlePassingOfTile();
-            }
-
-            yield return new WaitForFixedUpdate();
+            tileToPass.HandlePassingTile(TurnManager.instance.CurrentPlayerGroup);
         }
+    }
+
+    private void CheckForLastTile()
+    {
+        if (currentAmountToMove <= 0)
+        {
+            currentAmountToMove = 0;
+            doneMoving = true;
+        }
+    }
+
+    private void MovePawnToNextLerpPos(Vector3 oldPos, Vector3 newPos, int elapsedFrames)
+    {
+        float interpolairRatio = (float)elapsedFrames / (float)amountOfFramesToGetToNextSpace;
+        Vector3 nextLerpedPos = Vector3.Lerp(oldPos, newPos, interpolairRatio);
+        MovePawnTransform(nextLerpedPos);
+
+        characterRotationTransform.LookAt(newPos);
     }
 
     private void MovePawnTransform(Vector3 posToMoveTo) { transform.position = posToMoveTo; }
-
-    public int MovedSpaces { get => movedSpaces; private set => movedSpaces = value; }
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     public SmartTile CurrentSmartTile { get => currentSmartTile; private set => currentSmartTile = value; }
     public bool ChoosingDirection { get => choosingDirection; set => choosingDirection = value; }
     public string PlayerID { get => playerID; }
     public Animator Animator { get => animator; private set => animator = value; }
+    public int CurrentAmountToMove { get => currentAmountToMove; }
+    public bool DoneMoving { get => doneMoving; set => doneMoving = value; }
+    public int AmountAlreadyMoved { get => amountAlreadyMoved; }
 }

@@ -32,7 +32,7 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         StarPlacer.instance.PlaceStarOnBoard();
-        CurrentPlayerGroup.GroupPawn.MovePawnToTile(TileManager.instance.GetStartTile());
+        CurrentPlayerGroup.GroupPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
     }
 
     private void Update()

@@ -60,7 +60,7 @@ public class GroupsManager : MonoBehaviour
         }
     }
 
-    private PlayerGroup GetGroupByID(string id)
+    public PlayerGroup GetGroupByID(string id)
     {
         foreach (PlayerGroup playerGroup in playerGroupsInGame)
         {

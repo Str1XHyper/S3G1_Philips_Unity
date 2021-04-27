@@ -24,6 +24,22 @@ public class ChooseDirectionTile : SmartTile
         ChooseDirection(currentPlayerGroup);
     }
 
+    public void SetChosenDirection(PlayerGroup currentPlayerGroup, MovementDirection chosenDirection)
+    {
+        if (chosenDirection == alternateDirection)
+        {
+            MoveToNextTile = false;
+            SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, alternateDirection));
+        }
+        else
+        {
+            MoveToNextTile = true;
+            SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, defaultDirection));
+        }
+
+        currentPlayerGroup.GroupPawn.ChoosingDirection = false;
+    }
+
     private void ChooseDirection(PlayerGroup currentPlayerGroup)
     {
         currentPlayerGroup.GroupPawn.ChoosingDirection = true;
@@ -31,10 +47,6 @@ public class ChooseDirectionTile : SmartTile
         if (GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID == currentPlayerGroup.GroupPawn.PlayerID)
         {
             StartCoroutine(ChooseDirectionPrompt(currentPlayerGroup));
-        }
-        else
-        {
-            //TODO: Wait for server to tell direction
         }
 
         Debug.Log("Choose " + defaultDirection + " or " + alternateDirection);
@@ -51,17 +63,14 @@ public class ChooseDirectionTile : SmartTile
         {
             if (DirectionPressed(defaultDirection))
             {
-                MoveToNextTile = true;
-
-                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, defaultDirection));
+                SetChosenDirection(currentPlayerGroup, defaultDirection);
                 directionIsChosen = true;
                 break;
             }
             else if (DirectionPressed(alternateDirection))
             {
-                MoveToNextTile = false;
-                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, alternateDirection));
-                directionIsChosen = true;
+                SetChosenDirection(currentPlayerGroup, alternateDirection);
+                directionIsChosen = true; 
                 break;
             }
 
@@ -71,17 +80,22 @@ public class ChooseDirectionTile : SmartTile
 
         if (!directionIsChosen)
         {
-            if (Random.Range(0,2) == 1)
-            {
-                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, defaultDirection));
-            }
-            else
-            {
-                SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, alternateDirection));
-            }
+            ChooseRandomDirection(currentPlayerGroup);
         }
+    }
 
-        currentPlayerGroup.GroupPawn.ChoosingDirection = false;
+    private void ChooseRandomDirection(PlayerGroup currentPlayerGroup)
+    {
+        if (Random.Range(0, 2) == 1)
+        {
+            SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, defaultDirection));
+            SetChosenDirection(currentPlayerGroup, defaultDirection);
+        }
+        else
+        {
+            SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, alternateDirection));
+            SetChosenDirection(currentPlayerGroup, alternateDirection);
+        }
     }
 
     private bool DirectionPressed(MovementDirection direction)
