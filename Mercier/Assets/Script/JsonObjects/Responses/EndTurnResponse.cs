@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-[Serializable]
-public class TurnEndMessage : SocketMessage
+public class EndTurnResponse : SocketResponse
 {
     public int currentTileIndex;
 
-    public TurnEndMessage(string playerId, int currentTileIndex) : base(playerId)
+    protected EndTurnResponse(string playerId, int currentTileIndex) : base(playerId)
     {
         this.currentTileIndex = currentTileIndex;
-        messageType = MessageType.TURN_END;
+        responseType = ResponseType.TURN_END;
     }
 }

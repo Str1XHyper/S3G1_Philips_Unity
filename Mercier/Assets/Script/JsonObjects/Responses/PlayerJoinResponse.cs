@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 public class PlayerJoinResponse : SocketResponse
 {
-    public List<string> amountOfPlayers;
+    public List<string> players;
 
-    protected PlayerJoinResponse(string playerId, List<string> amountOfPlayers) : base(playerId)
+    protected PlayerJoinResponse(string playerId, List<string> players) : base(playerId)
     {
-        this.amountOfPlayers = amountOfPlayers;
+        this.players = players;
         responseType = ResponseType.PLAYER_JOIN;
     }
 }

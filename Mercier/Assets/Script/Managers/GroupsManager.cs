@@ -20,6 +20,26 @@ public class GroupsManager : MonoBehaviour
 
     [SerializeField] private List<PlayerGroup> playerGroupsInGame = new List<PlayerGroup>();
 
+    private string id = "";
+    private bool spawnPlayer = false;
+
+    private void Update()
+    {
+        if (spawnPlayer)
+        {
+            spawnPlayer = false;
+
+            GameObject newPlayerGroup = Instantiate(serverPlayerGroupPrefab);
+
+            ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
+
+            serverPawn.SetID(id);
+            serverPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
+
+            PlayerGroupsInGame.Add(GetComponent<PlayerGroup>());
+        }
+    }
+
     public void MovePlayer(string id, int amountToMove)
     {
         PlayerGroup groupToMove = GetGroupByID(id);
@@ -49,13 +69,8 @@ public class GroupsManager : MonoBehaviour
         {
             if (GetLocalPlayer().GroupPawn.PlayerID != id)
             {
-                GameObject newPlayerGroup = Instantiate(serverPlayerGroupPrefab);
-
-                ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
-
-                serverPawn.SetID(id);
-
-                PlayerGroupsInGame.Add(GetComponent<PlayerGroup>());
+                this.id = id;
+                spawnPlayer = true;
             }
         }
     }

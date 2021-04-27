@@ -59,7 +59,7 @@ public class Turn
 
     public void End()
     {
-        SocketCaller.instance.EndTurn(new TurnEndMessage(currentPlayerGroup.GroupPawn.PlayerID));
+        SocketCaller.instance.EndTurn(new TurnEndMessage(currentPlayerGroup.GroupPawn.PlayerID, 1));
 
         currentTurnState = TurnState.QUESTION;
     }
