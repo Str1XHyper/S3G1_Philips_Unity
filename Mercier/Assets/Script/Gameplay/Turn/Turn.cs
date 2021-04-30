@@ -32,10 +32,6 @@ public class Turn
         {
             RollDice();
             
-            //Cheat code TODO: remove at final
-            if (Input.GetKey(KeyCode.Alpha1))
-                rolledNumber = 1;
-
             alreadyStartedMoved = true;
         }
 
@@ -67,6 +63,11 @@ public class Turn
     private void RollDice()
     {
         rolledNumber = DiceRoller.instance.GetRandomNumber();
+
+        //Cheat code TODO: remove at final
+        if (Input.GetKey(KeyCode.Alpha1))
+            rolledNumber = 1; 
+        
         SocketCaller.instance.DiceThrown(new DiceThrowMessage(currentPlayerGroup.GroupPawn.PlayerID, rolledNumber));
     }
 

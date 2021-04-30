@@ -48,27 +48,19 @@ public class SocketListener : MonoBehaviour
     private void HandleDirectionChosenResponse(DirectionChosenResponse directionChosenResponse)
     {
         PlayerGroup group = GroupsManager.instance.GetGroupByID(directionChosenResponse.playerId);
-
-
-        StartCoroutine(waitForDirectionTile(group, directionChosenResponse));
-
         
-    }
-
-    private IEnumerator waitForDirectionTile(PlayerGroup currentGroup, DirectionChosenResponse directionChosenResponse)
-    {
         bool noDirectionTile = true;
         ChooseDirectionTile tileToSet = null;
 
         while (noDirectionTile)
         {
-            if (currentGroup.GroupPawn.CurrentSmartTile.GetType() == typeof(ChooseDirectionTile))
+            if (group.GroupPawn.CurrentSmartTile.GetType() == typeof(ChooseDirectionTile))
             {
-                tileToSet = (ChooseDirectionTile)currentGroup.GroupPawn.CurrentSmartTile;
-                tileToSet.SetChosenDirection(currentGroup, directionChosenResponse.ChosenDirection);
+                tileToSet = (ChooseDirectionTile)group.GroupPawn.CurrentSmartTile;
+                tileToSet.SetChosenDirectionForServerPawn(group, directionChosenResponse.ChosenDirection);
+
                 noDirectionTile = false;
             }
-            yield return new WaitForSeconds(1);
         }
     }
 

@@ -11,19 +11,35 @@ public class Pawn : MonoBehaviour
 
     private SmartTile currentSmartTile;
     private Transform characterRotationTransform;
+    private PlayerGroup playerGroup;
 
     private bool isMoving = false;
     private bool doneMoving = false;
     private bool choosingDirection = false;
     private int currentAmountToMove = 0;
     private int amountAlreadyMoved = 0;
+    private bool alreadyChoseADirection = false;
 
-    private void Update()
+    private void Start()
+    {
+        playerGroup = GetComponent<PlayerGroup>();
+    }
+
+    private void FixedUpdate()
     {
         if (currentAmountToMove > 0)
         {
             if (!isMoving && !choosingDirection)
             {
+                if (currentSmartTile.GetType() == typeof(ChooseDirectionTile) && amountAlreadyMoved == 0 && !alreadyChoseADirection)
+                {
+                    currentSmartTile.HandlePassingTile(GetComponent<PlayerGroup>());
+                    alreadyChoseADirection = true;
+                    return;
+                }
+
+                alreadyChoseADirection = false;
+
                 currentAmountToMove--;
                 MovePawnToNextSpace();
             }
@@ -61,8 +77,8 @@ public class Pawn : MonoBehaviour
     {
         characterRotationTransform = GetComponentInChildren<AnimationPositionReseter>().transform;
 
-        IsMoving = true;
-        TurnManager.instance.CurrentPlayerGroup.GroupPawn.animator.SetFloat("Forward", 0.5f);
+        isMoving = true;
+        animator.SetFloat("Forward", 0.5f);
 
         for (int elapsedFrames = 0; elapsedFrames < amountOfFramesToGetToNextSpace; elapsedFrames++)
         {
@@ -75,7 +91,7 @@ public class Pawn : MonoBehaviour
 
         MovePawnTransform(newPos);
 
-        IsMoving = false;
+        isMoving = false;
         amountAlreadyMoved++;
     }
 
@@ -83,7 +99,7 @@ public class Pawn : MonoBehaviour
     {
         if (currentAmountToMove > 0)
         {
-            tileToPass.HandlePassingTile(TurnManager.instance.CurrentPlayerGroup);
+            tileToPass.HandlePassingTile(GetComponent<PlayerGroup>());
         }
     }
 

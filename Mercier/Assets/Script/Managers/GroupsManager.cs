@@ -36,7 +36,7 @@ public class GroupsManager : MonoBehaviour
             serverPawn.SetID(id);
             serverPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
 
-            PlayerGroupsInGame.Add(GetComponent<PlayerGroup>());
+            PlayerGroupsInGame.Add(newPlayerGroup.GetComponent<PlayerGroup>());
         }
     }
 

@@ -33,7 +33,6 @@ public class UI_manager : MonoBehaviour
     [SerializeField] private GameObject FeedbackCorrectBackground;
     [SerializeField] private GameObject FeedbackIncorrectBackground;
 
-
     void Start()
     {
         buttonSend.onClick.AddListener(() => SendAnswer());

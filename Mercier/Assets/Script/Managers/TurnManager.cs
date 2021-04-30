@@ -26,7 +26,7 @@ public class TurnManager : MonoBehaviour
 
     private void StartNewTurn()
     {
-        currentTurn = new Turn(CurrentPlayerGroup);
+        currentTurn = new Turn(GroupsManager.instance.GetLocalPlayer());
     }
 
     private void Start()
