@@ -19,10 +19,10 @@ public class ClientPawn : Pawn
     IEnumerator ConnectToServer()
     {
         yield return new WaitForSecondsRealtime(AwaitBeforeConnection);
-        string localPlayerId = GetPlayerID();
-        string lessonId = GetLessonID();
-        //TODO: Fill username Tijn
-        SocketCaller.instance.PlayerJoin(new PlayerJoinMessage(localPlayerId, lessonId, "Piet"));
+        //string localPlayerId = GetPlayerID();
+        //string lessonId = GetLessonID();
+        //SocketCaller.instance.PlayerJoin(new PlayerJoinMessage(localPlayerId, lessonId, "Piet"));
+        SocketCaller.instance.PlayerJoin(new PlayerJoinMessage("", "", "Piet"));
     }
 
     private string GetLessonID()

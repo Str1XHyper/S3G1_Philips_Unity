@@ -69,6 +69,7 @@ public class SocketListener : MonoBehaviour
         foreach (JsonPlayer player in playerJoinResponse.players)
         {
             GroupsManager.instance.CreatePlayer(player);
+            Debug.Log(player.Username);
         }
     }
 
