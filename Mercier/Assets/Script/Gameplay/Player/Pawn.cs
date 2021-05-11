@@ -19,6 +19,7 @@ public class Pawn : MonoBehaviour
     private int currentAmountToMove = 0;
     private int amountAlreadyMoved = 0;
     private bool alreadyChoseADirection = false;
+    private string username;
 
     private void Start()
     {
@@ -121,6 +122,11 @@ public class Pawn : MonoBehaviour
         characterRotationTransform.LookAt(newPos);
     }
 
+    public void SetUserName(string username)
+    {
+        this.username = username;
+    }
+
     private void MovePawnTransform(Vector3 posToMoveTo) { transform.position = posToMoveTo; }
     public bool IsMoving { get => isMoving; set => isMoving = value; }
     public SmartTile CurrentSmartTile { get => currentSmartTile; private set => currentSmartTile = value; }
@@ -130,4 +136,5 @@ public class Pawn : MonoBehaviour
     public int CurrentAmountToMove { get => currentAmountToMove; }
     public bool DoneMoving { get => doneMoving; set => doneMoving = value; }
     public int AmountAlreadyMoved { get => amountAlreadyMoved; }
+    public string Username { get => username; }
 }

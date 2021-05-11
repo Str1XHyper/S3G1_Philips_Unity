@@ -32,7 +32,7 @@ public class SocketListener : MonoBehaviour
                 HandleQuestion(JsonUtility.FromJson<QuestionResponse>(json));
                 break;
             case ResponseType.SCORE:
-                HandleScore(JsonUtility.FromJson<ScoreResponse>(json));
+                HandleScore(JsonHelper.getJsonArray<ScoreResponse>(json));
                 break;
             case ResponseType.PLAYER_JOIN:
                 HandlePlayerJoin(JsonUtility.FromJson<PlayerJoinResponse>(json));
@@ -66,13 +66,13 @@ public class SocketListener : MonoBehaviour
 
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
-        foreach (string player in playerJoinResponse.players)
+        foreach (JsonPlayer player in playerJoinResponse.players)
         {
             GroupsManager.instance.CreatePlayer(player);
         }
     }
 
-    private void HandleScore(ScoreResponse scoreResponse)
+    private void HandleScore(ScoreResponse[] scoreResponse)
     {
         UI_manager.instance.UpdateText(scoreResponse);
     }
@@ -89,7 +89,10 @@ public class SocketListener : MonoBehaviour
 
     private void HandleStartTurn(StartTurnResponse startTurnResponse)
     {
-
+        if (startTurnResponse.playerId == GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID)
+        {
+            TurnManager.instance.StartNewTurn();
+        }
     }
 
     private void HandleStartGame(StartGameResponse startGameResponse)

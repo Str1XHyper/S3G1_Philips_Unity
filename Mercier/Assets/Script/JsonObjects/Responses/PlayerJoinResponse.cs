@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 public class PlayerJoinResponse : SocketResponse
 {
-    public List<string> players;
-
-    protected PlayerJoinResponse(string playerId, List<string> players) : base(playerId)
+    public List<JsonPlayer> players;
+    
+    protected PlayerJoinResponse(string playerId, List<JsonPlayer> players) : base(playerId)
     {
         this.players = players;
         responseType = ResponseType.PLAYER_JOIN;

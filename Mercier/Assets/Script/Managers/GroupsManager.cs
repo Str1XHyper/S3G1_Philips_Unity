@@ -20,7 +20,7 @@ public class GroupsManager : MonoBehaviour
 
     [SerializeField] private List<PlayerGroup> playerGroupsInGame = new List<PlayerGroup>();
 
-    private string id = "";
+    private JsonPlayer player;
     private bool spawnPlayer = false;
 
     private void Update()
@@ -33,7 +33,8 @@ public class GroupsManager : MonoBehaviour
 
             ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
 
-            serverPawn.SetID(id);
+            serverPawn.SetID(player.PlayerID);
+            serverPawn.SetUserName(player.Username);
             serverPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
 
             PlayerGroupsInGame.Add(newPlayerGroup.GetComponent<PlayerGroup>());
@@ -63,13 +64,13 @@ public class GroupsManager : MonoBehaviour
         return null;
     }
 
-    public void CreatePlayer(string id)
+    public void CreatePlayer(JsonPlayer player)
     {
-        if (!ContainsID(id))
+        if (!ContainsID(player.PlayerID))
         {
-            if (GetLocalPlayer().GroupPawn.PlayerID != id)
+            if (GetLocalPlayer().GroupPawn.PlayerID != player.PlayerID)
             {
-                this.id = id;
+                this.player = player;
                 spawnPlayer = true;
             }
         }
