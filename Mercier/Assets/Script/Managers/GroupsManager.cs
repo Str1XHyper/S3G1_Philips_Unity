@@ -73,10 +73,6 @@ public class GroupsManager : MonoBehaviour
                 this.player = player;
                 spawnPlayer = true;
             }
-            else
-            {
-                GetLocalPlayer().GroupPawn.SetUserName(player.Username);
-            }
         }
     }
 
