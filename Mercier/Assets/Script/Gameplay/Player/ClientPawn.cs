@@ -20,7 +20,7 @@ public class ClientPawn : Pawn
     {
         yield return new WaitForSecondsRealtime(AwaitBeforeConnection);
 #if UNITY_EDITOR
-        SocketCaller.instance.PlayerJoin(new PlayerJoinMessage("1", "3", "Piet"));
+        SocketCaller.instance.PlayerJoin(new PlayerJoinMessage("1", "ac04dcab-b025-45ff-b90a-d15b73759284", "Piet"));
 #else
         string localPlayerId = GetPlayerID();
         string lessonId = GetLessonID();

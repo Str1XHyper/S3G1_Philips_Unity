@@ -13,7 +13,7 @@ public class Pawn : MonoBehaviour
 
     private string username;
 
-    private void Start()
+    private void Awake()
     {
         playerGroup = GetComponent<PlayerGroup>();
         pawnMover = GetComponent<PawnMover>();
@@ -31,7 +31,7 @@ public class Pawn : MonoBehaviour
 
     public void SetID(string playerID)
     {
-        if (this.playerID != "")
+        if (this.playerID == "")
         {
             this.playerID = playerID;
         }

@@ -103,13 +103,5 @@ public class GroupsManager : MonoBehaviour
         return false;
     }
 
-    public void CreateLocalPlayer(JsonPlayer player)
-    {
-        if (GetLocalPlayer().GroupPawn.PlayerID == "")
-        {
-            GetLocalPlayer().GroupPawn.SetID(player.PlayerID);
-        }
-    }
-
     public List<PlayerGroup> PlayerGroupsInGame { get => playerGroupsInGame; private set => playerGroupsInGame = value; }
 }

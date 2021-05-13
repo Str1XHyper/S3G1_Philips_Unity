@@ -9,7 +9,7 @@ public class PawnMover : MonoBehaviour
     private Transform characterRotationTransform;
 
     private Pawn pawn;
-    private PawnLerp pawnLerp = new PawnLerp();
+    private PawnLerp pawnLerp;
 
     private bool isMoving = false;
     private bool doneMoving = false;
@@ -22,6 +22,7 @@ public class PawnMover : MonoBehaviour
     private void Start()
     {
         pawn = GetComponent<Pawn>();
+        pawnLerp = new PawnLerp(this);
         characterRotationTransform = GetComponentInChildren<AnimationPositionReseter>().transform;
     }
 

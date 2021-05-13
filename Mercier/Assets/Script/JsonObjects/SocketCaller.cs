@@ -39,8 +39,9 @@ public class SocketCaller : MonoBehaviour
 
     public void PlayerJoin(PlayerJoinMessage playerJoin)
     {
-        SendJson(playerJoin);
         GroupsManager.instance.GetLocalPlayer().GroupPawn.SetID(playerJoin.playerId);
+        GroupsManager.instance.PlayerGroupsInGame.Add(GroupsManager.instance.GetLocalPlayer());
+        SendJson(playerJoin);
     }
 
     public void EncounterSpace(EncounteredSpaceMessage encounteredSpace)

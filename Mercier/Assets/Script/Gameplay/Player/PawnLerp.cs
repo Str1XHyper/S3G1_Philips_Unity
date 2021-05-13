@@ -5,6 +5,11 @@ public class PawnLerp
 {
     private PawnMover pawnMover;
 
+    public PawnLerp(PawnMover pawnMover)
+    {
+        this.pawnMover = pawnMover;
+    }
+
     public IEnumerator LerpPawnToNewPos(Vector3 oldPos, Vector3 newPos)
     {
         pawnMover.IsMoving = true;
