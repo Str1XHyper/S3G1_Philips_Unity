@@ -24,15 +24,15 @@ public class TurnManager : MonoBehaviour
 
     private TurnState lastState = TurnState.START;
 
-    private void StartNewTurn()
+    public void StartNewTurn()
     {
-        currentTurn = new Turn(CurrentPlayerGroup);
+        currentTurn = new Turn(GroupsManager.instance.GetLocalPlayer());
     }
 
     private void Start()
     {
         StarPlacer.instance.PlaceStarOnBoard();
-        CurrentPlayerGroup.GroupPawn.MovePawnToTile(TileManager.instance.GetStartTile());
+        CurrentPlayerGroup.GroupPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
     }
 
     private void Update()

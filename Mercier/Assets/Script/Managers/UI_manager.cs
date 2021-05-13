@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Text;
 
 public class UI_manager : MonoBehaviour
 {
@@ -33,7 +34,6 @@ public class UI_manager : MonoBehaviour
     [SerializeField] private GameObject FeedbackCorrectBackground;
     [SerializeField] private GameObject FeedbackIncorrectBackground;
 
-
     void Start()
     {
         buttonSend.onClick.AddListener(() => SendAnswer());
@@ -46,9 +46,16 @@ public class UI_manager : MonoBehaviour
         starText.text = "Stars: " + TurnManager.instance.CurrentPlayerGroup.CurrentAmountOfStars.ToString();
     }
 
-    public void UpdateText(ScoreResponse scoreResponse)
+    public void UpdateText(ScoreResponse[] scoreResponses)
     {
         //TODO: TIJN fix ff dat hier scores afgehandeld worden per persoon
+        StringBuilder stringBuilder = new StringBuilder();
+        foreach (ScoreResponse response in scoreResponses)
+        {
+            stringBuilder.Append(response.playerId);
+            stringBuilder.Append(response.Points);
+            stringBuilder.Append(response.Stars);
+        }
     }
 
     public void UpdateQuestion(string questionText)
