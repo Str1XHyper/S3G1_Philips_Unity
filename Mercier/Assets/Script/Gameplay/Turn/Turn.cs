@@ -35,16 +35,16 @@ public class Turn
             alreadyStartedMoved = true;
         }
 
-        if (currentPlayerGroup.GroupPawn.DoneMoving && alreadyStartedMoved)
+        if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
         {
-            currentPlayerGroup.GroupPawn.DoneMoving = false;
+            currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
             currentTurnState = TurnState.ENCOUNTER_SPACE;
         }
     }
 
     public void EncounterSpace()
     {
-        SmartTile currentTile = currentPlayerGroup.GroupPawn.CurrentSmartTile;
+        SmartTile currentTile = currentPlayerGroup.GroupPawn.PawnMover.CurrentSmartTile;
         currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward", 0);
         currentTile.HandleTile(currentPlayerGroup);
 

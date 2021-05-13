@@ -39,7 +39,7 @@ public class ChooseDirectionTile : SmartTile
             currentChosenDirection = defaultDirection;
         }
 
-        currentPlayerGroup.GroupPawn.ChoosingDirection = false;
+        currentPlayerGroup.GroupPawn.PawnMover.ChoosingDirection = false;
     }
 
     public void SetChosenDirectionLocalPlayer(PlayerGroup currentPlayerGroup, MovementDirection chosenDirection)
@@ -52,7 +52,7 @@ public class ChooseDirectionTile : SmartTile
 
     private void ChooseDirection(PlayerGroup currentPlayerGroup)
     {
-        currentPlayerGroup.GroupPawn.ChoosingDirection = true;
+        currentPlayerGroup.GroupPawn.PawnMover.ChoosingDirection = true;
 
         if (GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID == currentPlayerGroup.GroupPawn.PlayerID)
         {

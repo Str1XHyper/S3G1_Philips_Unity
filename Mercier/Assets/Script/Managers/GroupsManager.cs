@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,7 +65,7 @@ public class GroupsManager : MonoBehaviour
         return null;
     }
 
-    public void CreatePlayer(JsonPlayer player)
+    public void CreateServerPlayer(JsonPlayer player)
     {
         if (!ContainsID(player.PlayerID))
         {
@@ -100,6 +101,14 @@ public class GroupsManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void CreateLocalPlayer(JsonPlayer player)
+    {
+        if (GetLocalPlayer().GroupPawn.PlayerID == "")
+        {
+            GetLocalPlayer().GroupPawn.SetID(player.PlayerID);
+        }
     }
 
     public List<PlayerGroup> PlayerGroupsInGame { get => playerGroupsInGame; private set => playerGroupsInGame = value; }

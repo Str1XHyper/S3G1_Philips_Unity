@@ -4,122 +4,37 @@ using UnityEngine;
 
 public class Pawn : MonoBehaviour
 {
-    [SerializeField] private int amountOfFramesToGetToNextSpace;
     [SerializeField] private Animator animator;
 
-    protected string playerID;
+    protected string playerID = "";
 
-    private SmartTile currentSmartTile;
-    private Transform characterRotationTransform;
     private PlayerGroup playerGroup;
+    private PawnMover pawnMover;
 
-    private bool isMoving = false;
-    private bool doneMoving = false;
-    private bool choosingDirection = false;
-    private int currentAmountToMove = 0;
-    private int amountAlreadyMoved = 0;
-    private bool alreadyChoseADirection = false;
     private string username;
 
     private void Start()
     {
         playerGroup = GetComponent<PlayerGroup>();
-    }
-
-    private void FixedUpdate()
-    {
-        if (currentAmountToMove > 0)
-        {
-            if (!isMoving && !choosingDirection)
-            {
-                if (currentSmartTile.GetType() == typeof(ChooseDirectionTile) && amountAlreadyMoved == 0 && !alreadyChoseADirection)
-                {
-                    currentSmartTile.HandlePassingTile(GetComponent<PlayerGroup>());
-                    alreadyChoseADirection = true;
-                    return;
-                }
-
-                alreadyChoseADirection = false;
-
-                currentAmountToMove--;
-                MovePawnToNextSpace();
-            }
-        }
+        pawnMover = GetComponent<PawnMover>();
     }
 
     public void MovePawn(int amountToMove)
     {
-        HandlePassingATile(currentSmartTile);
-        amountAlreadyMoved = 0;
-        currentAmountToMove = amountToMove;
+        pawnMover.MovePawn(amountToMove);
     }
 
     public void MovePawnDirectlyToTile(SmartTile tileToMoveTo)
     {
-        currentSmartTile = tileToMoveTo;
-        MovePawnTransform(currentSmartTile.PawnPos);
+        pawnMover.MovePawnDirectlyToTile(tileToMoveTo);
     }
 
-    private void MovePawnToNextSpace()
+    public void SetID(string playerID)
     {
-        SmartTile tileToMoveTo = currentSmartTile.NextTile;
-
-        tileToMoveTo = TileManager.instance.GetCorrectDirectionFromDirectionTile(currentSmartTile, tileToMoveTo);
-        tileToMoveTo = TileManager.instance.CheckForAlternateDirectionPortalTile(currentSmartTile, tileToMoveTo);
-
-        HandlePassingATile(tileToMoveTo);
-
-        StartCoroutine(LerpPawnToNewPos(currentSmartTile.PawnPos, tileToMoveTo.PawnPos));
-
-        currentSmartTile = tileToMoveTo;
-    }
-
-    private IEnumerator LerpPawnToNewPos(Vector3 oldPos, Vector3 newPos)
-    {
-        characterRotationTransform = GetComponentInChildren<AnimationPositionReseter>().transform;
-
-        isMoving = true;
-        animator.SetFloat("Forward", 0.5f);
-
-        for (int elapsedFrames = 0; elapsedFrames < amountOfFramesToGetToNextSpace; elapsedFrames++)
+        if (this.playerID != "")
         {
-            MovePawnToNextLerpPos(oldPos, newPos, elapsedFrames);
-
-            yield return new WaitForFixedUpdate();
+            this.playerID = playerID;
         }
-
-        CheckForLastTile();
-
-        MovePawnTransform(newPos);
-
-        isMoving = false;
-        amountAlreadyMoved++;
-    }
-
-    private void HandlePassingATile(SmartTile tileToPass)
-    {
-        if (currentAmountToMove > 0)
-        {
-            tileToPass.HandlePassingTile(GetComponent<PlayerGroup>());
-        }
-    }
-
-    private void CheckForLastTile()
-    {
-        if (currentAmountToMove <= 0)
-        {
-            currentAmountToMove = 0;
-            doneMoving = true;
-        }
-    }
-
-    private void MovePawnToNextLerpPos(Vector3 oldPos, Vector3 newPos, int elapsedFrames)
-    {
-        float interpolairRatio = (float)elapsedFrames / (float)amountOfFramesToGetToNextSpace;
-        Vector3 nextLerpedPos = Vector3.Lerp(oldPos, newPos, interpolairRatio);
-        MovePawnTransform(nextLerpedPos);
-
-        characterRotationTransform.LookAt(newPos);
     }
 
     public void SetUserName(string username)
@@ -127,14 +42,8 @@ public class Pawn : MonoBehaviour
         this.username = username;
     }
 
-    private void MovePawnTransform(Vector3 posToMoveTo) { transform.position = posToMoveTo; }
-    public bool IsMoving { get => isMoving; set => isMoving = value; }
-    public SmartTile CurrentSmartTile { get => currentSmartTile; private set => currentSmartTile = value; }
-    public bool ChoosingDirection { get => choosingDirection; set => choosingDirection = value; }
-    public string PlayerID { get => playerID; }
-    public Animator Animator { get => animator; private set => animator = value; }
-    public int CurrentAmountToMove { get => currentAmountToMove; }
-    public bool DoneMoving { get => doneMoving; set => doneMoving = value; }
-    public int AmountAlreadyMoved { get => amountAlreadyMoved; }
-    public string Username { get => username; }
+    public string PlayerID { get => playerID;}
+    public Animator Animator { get => animator; }
+    public string Username { get => username;  }
+    public PawnMover PawnMover { get => pawnMover; }
 }
