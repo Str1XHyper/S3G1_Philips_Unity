@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 [Serializable]
 public class TurnEndMessage : SocketMessage
 {
-    public TurnEndMessage(string playerId) : base(playerId)
+    public int currentTileIndex;
+
+    public TurnEndMessage(string playerId, int currentTileIndex) : base(playerId)
     {
+        this.currentTileIndex = currentTileIndex;
         messageType = MessageType.TURN_END;
     }
 }

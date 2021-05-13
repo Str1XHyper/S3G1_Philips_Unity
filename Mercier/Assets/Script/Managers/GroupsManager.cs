@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,27 @@ public class GroupsManager : MonoBehaviour
     [SerializeField] private GameObject serverPlayerGroupPrefab;
 
     [SerializeField] private List<PlayerGroup> playerGroupsInGame = new List<PlayerGroup>();
+
+    private JsonPlayer player;
+    private bool spawnPlayer = false;
+
+    private void Update()
+    {
+        if (spawnPlayer)
+        {
+            spawnPlayer = false;
+
+            GameObject newPlayerGroup = Instantiate(serverPlayerGroupPrefab);
+
+            ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
+
+            serverPawn.SetID(player.PlayerID);
+            serverPawn.SetUserName(player.Username);
+            serverPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
+
+            PlayerGroupsInGame.Add(newPlayerGroup.GetComponent<PlayerGroup>());
+        }
+    }
 
     public void MovePlayer(string id, int amountToMove)
     {
@@ -43,24 +65,19 @@ public class GroupsManager : MonoBehaviour
         return null;
     }
 
-    public void CreatePlayer(string id)
+    public void CreateServerPlayer(JsonPlayer player)
     {
-        if (!ContainsID(id))
+        if (!ContainsID(player.PlayerID))
         {
-            if (GetLocalPlayer().GroupPawn.PlayerID != id)
+            if (GetLocalPlayer().GroupPawn.PlayerID != player.PlayerID)
             {
-                GameObject newPlayerGroup = Instantiate(serverPlayerGroupPrefab);
-
-                ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
-
-                serverPawn.SetID(id);
-
-                PlayerGroupsInGame.Add(GetComponent<PlayerGroup>());
+                this.player = player;
+                spawnPlayer = true;
             }
         }
     }
 
-    private PlayerGroup GetGroupByID(string id)
+    public PlayerGroup GetGroupByID(string id)
     {
         foreach (PlayerGroup playerGroup in playerGroupsInGame)
         {
