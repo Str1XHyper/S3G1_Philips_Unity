@@ -24,15 +24,15 @@ public class TurnManager : MonoBehaviour
 
     private TurnState lastState = TurnState.START;
 
-    private void StartNewTurn()
+    public void StartNewTurn()
     {
-        currentTurn = new Turn(CurrentPlayerGroup);
+        currentTurn = new Turn(GroupsManager.instance.GetLocalPlayer());
     }
 
     private void Start()
     {
         StarPlacer.instance.PlaceStarOnBoard();
-        CurrentPlayerGroup.GroupPawn.MovePawnToTile(TileManager.instance.GetStartTile());
+        CurrentPlayerGroup.GroupPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
     }
 
     private void Update()
@@ -61,6 +61,7 @@ public class TurnManager : MonoBehaviour
                     EndOfTurn();
                     break;
                 case TurnState.QUESTION:
+                      //CameraManager.instance.ChangeCameraTarget( INSERT TARGET HERE );
                     break;
                 default:
                     break;

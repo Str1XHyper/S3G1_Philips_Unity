@@ -11,7 +11,7 @@ public class Turn
 
     private int rolledNumber = 0;
 
-    private bool alreadyMoved = false;
+    private bool alreadyStartedMoved = false;
 
     private PlayerGroup currentPlayerGroup;
 
@@ -28,28 +28,23 @@ public class Turn
 
     public void Movement()
     {
-        if (!alreadyMoved)
+        if (!alreadyStartedMoved)
         {
-            currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward",0.5f);
             RollDice();
             
-            //Cheat code TODO: remove at final
-            if (Input.GetKey(KeyCode.Alpha1))
-                rolledNumber = 1;
-
-            currentPlayerGroup.GroupPawn.MovePawn(rolledNumber);
-            alreadyMoved = true;
+            alreadyStartedMoved = true;
         }
 
-        if (currentPlayerGroup.GroupPawn.MovedSpaces >= rolledNumber && alreadyMoved)
+        if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
         {
+            currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
             currentTurnState = TurnState.ENCOUNTER_SPACE;
         }
     }
 
     public void EncounterSpace()
     {
-        SmartTile currentTile = currentPlayerGroup.GroupPawn.CurrentSmartTile;
+        SmartTile currentTile = currentPlayerGroup.GroupPawn.PawnMover.CurrentSmartTile;
         currentPlayerGroup.GroupPawn.Animator.SetFloat("Forward", 0);
         currentTile.HandleTile(currentPlayerGroup);
 
@@ -60,7 +55,7 @@ public class Turn
 
     public void End()
     {
-        SocketCaller.instance.EndTurn(new TurnEndMessage(currentPlayerGroup.GroupPawn.PlayerID));
+        SocketCaller.instance.EndTurn(new TurnEndMessage(currentPlayerGroup.GroupPawn.PlayerID, 1));
 
         currentTurnState = TurnState.QUESTION;
     }
@@ -68,6 +63,11 @@ public class Turn
     private void RollDice()
     {
         rolledNumber = DiceRoller.instance.GetRandomNumber();
+
+        //Cheat code TODO: remove at final
+        if (Input.GetKey(KeyCode.Alpha1))
+            rolledNumber = 1; 
+
         SocketCaller.instance.DiceThrown(new DiceThrowMessage(currentPlayerGroup.GroupPawn.PlayerID, rolledNumber));
     }
 

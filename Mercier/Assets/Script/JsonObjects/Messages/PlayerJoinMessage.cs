@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 public class PlayerJoinMessage : SocketMessage
 {
-    public PlayerJoinMessage(string playerId) : base(playerId)
+    public string LessonId;
+    public string Username;
+
+    public PlayerJoinMessage(string playerId, string lessonId, string username) : base(playerId)
     {
         messageType = MessageType.PLAYER_JOIN;
         this.playerId = playerId;
+        this.LessonId = lessonId;
+        this.Username = username;
     }
 }

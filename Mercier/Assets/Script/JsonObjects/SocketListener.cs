@@ -32,7 +32,7 @@ public class SocketListener : MonoBehaviour
                 HandleQuestion(JsonUtility.FromJson<QuestionResponse>(json));
                 break;
             case ResponseType.SCORE:
-                HandleScore(JsonUtility.FromJson<ScoreResponse>(json));
+                HandleScore(JsonHelper.getJsonArray<ScoreResponse>(json));
                 break;
             case ResponseType.PLAYER_JOIN:
                 HandlePlayerJoin(JsonUtility.FromJson<PlayerJoinResponse>(json));
@@ -47,36 +47,57 @@ public class SocketListener : MonoBehaviour
 
     private void HandleDirectionChosenResponse(DirectionChosenResponse directionChosenResponse)
     {
-        throw new NotImplementedException();
+        PlayerGroup group = GroupsManager.instance.GetGroupByID(directionChosenResponse.playerId);
+        
+        bool noDirectionTile = true;
+        ChooseDirectionTile tileToSet = null;
+
+        while (noDirectionTile)
+        {
+            if (group.GroupPawn.PawnMover.CurrentSmartTile.GetType() == typeof(ChooseDirectionTile))
+            {
+                tileToSet = (ChooseDirectionTile)group.GroupPawn.PawnMover.CurrentSmartTile;
+                tileToSet.SetChosenDirectionForServerPawn(group, directionChosenResponse.ChosenDirection);
+
+                noDirectionTile = false;
+            }
+        }
     }
 
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
-        GroupsManager.instance.CreatePlayer(playerJoinResponse.playerId);
+        foreach (JsonPlayer player in playerJoinResponse.players)
+        {
+            GroupsManager.instance.CreateServerPlayer(player);
+            Debug.Log(player.Username);
+        }
     }
 
-    private void HandleScore(ScoreResponse scoreResponse)
+    private void HandleScore(ScoreResponse[] scoreResponse)
     {
         UI_manager.instance.UpdateText(scoreResponse);
     }
 
     private void HandleQuestion(QuestionResponse questionResponse)
     {
-        
+
     }
 
     private void HandleMovePlayer(MovePlayerResponse movePlayerResponse)
     {
-        throw new NotImplementedException();
+        GroupsManager.instance.MovePlayer(movePlayerResponse.playerId, movePlayerResponse.movementAmount);
     }
 
     private void HandleStartTurn(StartTurnResponse startTurnResponse)
     {
-        throw new NotImplementedException();
+        if (startTurnResponse.playerId == GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID)
+        {
+            TurnManager.instance.StartNewTurn();
+        }
     }
 
     private void HandleStartGame(StartGameResponse startGameResponse)
     {
-        throw new NotImplementedException();
+
     }
 }
