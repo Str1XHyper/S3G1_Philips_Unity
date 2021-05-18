@@ -102,7 +102,7 @@ public class TurnManager : MonoBehaviour
 
     private void AskQuestion()
     {
-        QuestionManager.instance.AskQuestion();
+        //QuestionManager.instance.AskQuestion();
     }
 
     public PlayerGroup CurrentPlayerGroup { get => GroupsManager.instance.PlayerGroupsInGame[currentGroupIndex]; }

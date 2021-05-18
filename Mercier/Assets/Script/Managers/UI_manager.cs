@@ -72,18 +72,15 @@ public class UI_manager : MonoBehaviour
 
     public void ShowQuestionBox(Question question)
     {
-        Debug.Log("trigger UI_Manager");
+        UnityThread.executeInLateUpdate(() => { 
+            questionGroup.SetActive(true);
+            InputGroup.gameObject.SetActive(true);
 
-        Destroy(questionGroup);
-
-        Debug.Log("trigger UI_Manager 2");
-
-
-        //questionText.text = question.question;
-        //correctAnswerText.text = question.answer;
-        //correctAnswerText.text = "test please work plz";
-        //questionGroup.gameObject.SetActive(true);
-        //InputGroup.gameObject.SetActive(true);
+            questionText.gameObject.SetActive(true);
+            questionText.text = question.question;
+            
+            correctAnswerText.text = question.answers[0].answer;
+        });
     }
 
     public void SendAnswer()
@@ -92,7 +89,6 @@ public class UI_manager : MonoBehaviour
         FeedbackGroup.gameObject.SetActive(true);
 
         string answer = answerInput.text;
-
         
         if(QuestionManager.instance.SendAnswer(answer))
         {
