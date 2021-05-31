@@ -19,7 +19,7 @@ public class QuestionManager : MonoBehaviour
         }
     }
     #endregion
-
+    private Question question = new Question();
     private List<Question> allQuestions = new List<Question>();
 
     private void Start()
@@ -65,21 +65,23 @@ public class QuestionManager : MonoBehaviour
 
     public bool SendAnswer(string answer)
     {
-        if(answer ==  allQuestions[0].answers[0].answer)
+        AnsweredQuestionMessage answerQuestionMessage = new AnsweredQuestionMessage(GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID, answer);
+        SocketCaller.instance.AnsweredQuestion(answerQuestionMessage);
+        if (answer == this.Question.answers[0].answer)
         {
             return true;
         }
         else
         {
             return false;
-        }
-
-        //Send Answer to Back-End
+        }        
     }
 
     public void AskQuestion(Question question)
     {
+        this.Question = question;
         UI_manager.instance.ShowQuestionBox(question);
     }
+    public Question Question { get => question; private set => question = value; }
     public List<Question> AllQuestions { get => allQuestions; private set => allQuestions = value; }
 }
