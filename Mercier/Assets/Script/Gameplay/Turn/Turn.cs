@@ -35,11 +35,11 @@ public class Turn
             alreadyStartedMoved = true;
         }
 
-        if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
-        {
-            currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
-            currentTurnState = TurnState.ENCOUNTER_SPACE;
-        }
+        //if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
+        //{
+        //    currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
+        //    currentTurnState = TurnState.ENCOUNTER_SPACE;
+        //}
     }
 
     public void EncounterSpace()

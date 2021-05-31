@@ -13,7 +13,12 @@ public class Pawn : MonoBehaviour
 
     private string username;
 
-    private void Awake()
+    private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
     {
         playerGroup = GetComponent<PlayerGroup>();
         pawnMover = GetComponent<PawnMover>();
