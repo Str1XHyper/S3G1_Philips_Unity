@@ -19,22 +19,26 @@ public class ClientPawn : Pawn
     IEnumerator ConnectToServer()
     {
         yield return new WaitForSecondsRealtime(AwaitBeforeConnection);
-#if UNITY_EDITOR
-        SocketCaller.instance.PlayerJoin(new PlayerJoinMessage("1", "ac04dcab-b025-45ff-b90a-d15b73759284", "Piet"));
-#else
+
         string localPlayerId = GetPlayerID();
         string lessonId = GetLessonID();
         SocketCaller.instance.PlayerJoin(new PlayerJoinMessage(localPlayerId, lessonId, "Piet"));
-#endif
     }
 
     private string GetLessonID()
     {
         string data = GetData();
-        string id = data.Split(',')[LessonSplitIndex];
         string lessonId = "";
 
-        lessonId = id;
+        if (string.IsNullOrEmpty(data))
+        {
+            lessonId = "ac04dcab-b025-45ff-b90a-d15b73759284";
+        }
+        else
+        {
+            string id = data.Split(',')[LessonSplitIndex];
+            lessonId = id;
+        }
 
         return lessonId;
     }
@@ -42,10 +46,17 @@ public class ClientPawn : Pawn
     private string GetPlayerID()
     {
         string data = GetData();
-        string id = data.Split(',')[PlayerIdSplitIndex];
         string playerId = "";
 
-        playerId = id;
+        if (string.IsNullOrEmpty(data))
+        {
+            playerId = UnityEngine.Random.Range(1, 9999).ToString();
+        }
+        else
+        {
+            string id = data.Split(',')[PlayerIdSplitIndex];
+            playerId = id;
+        }
 
         return playerId;
     }
@@ -53,7 +64,13 @@ public class ClientPawn : Pawn
     private static string GetData()
     {
         string currentPageUrl = Application.absoluteURL;
-        string data = currentPageUrl.Split('?')[DataSplitIndex];
+        string data = "";
+
+        if (!string.IsNullOrEmpty(currentPageUrl))
+        {
+            data = currentPageUrl.Split('?')[DataSplitIndex];
+        }
+
         return data;
     }
 }
