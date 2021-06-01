@@ -19,10 +19,8 @@ public class QuestionManager : MonoBehaviour
         }
     }
     #endregion
-
+    private Question question = new Question();
     private List<Question> allQuestions = new List<Question>();
-
-    private int currentQuestionIndex = 0;
 
     private void Start()
     {
@@ -65,54 +63,25 @@ public class QuestionManager : MonoBehaviour
 
     #endregion
 
-    private List<Question> DebugQuestionList()
-    {
-        List<Question> tempList = new List<Question>();
-        Question tempQuestion = new Question()
-        {
-            id = "0",
-            question = "Wat is 10 + 2?",
-            type = "open",
-            answer = "12"
-        };
-
-        tempList.Add(tempQuestion);
-
-        return tempList;
-    }
-
     public bool SendAnswer(string answer)
     {
-        if(answer ==  allQuestions[0].answer)
+        AnsweredQuestionMessage answerQuestionMessage = new AnsweredQuestionMessage(GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID, answer);
+        SocketCaller.instance.AnsweredQuestion(answerQuestionMessage);
+        if (answer == this.Question.answers[0].answer)
         {
             return true;
         }
         else
         {
             return false;
-        }
-
-        
-        //Send Answer to Back-End
+        }        
     }
 
-    public void AskQuestion()
+    public void AskQuestion(Question question)
     {
-        //Debug Question
-        allQuestions = DebugQuestionList();
-
-        //TODO: Hier vraag op scherm laten zien
-        //UI_manager.instance.UpdateQuestion(allQuestions[currentQuestionIndex].question);
-        UI_manager.instance.ShowQuestionBox(allQuestions[0]);
-
-        //Debug.Log(allQuestions[currentQuestionIndex].question);
-
-        currentQuestionIndex++;
-
-        if (currentQuestionIndex >= allQuestions.Count)
-        {
-            currentQuestionIndex = 0;
-        }
+        this.Question = question;
+        UI_manager.instance.ShowQuestionBox(question);
     }
+    public Question Question { get => question; private set => question = value; }
     public List<Question> AllQuestions { get => allQuestions; private set => allQuestions = value; }
 }
