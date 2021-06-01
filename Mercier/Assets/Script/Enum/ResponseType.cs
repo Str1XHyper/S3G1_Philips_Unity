@@ -7,5 +7,6 @@
     SCORE,
     PLAYER_JOIN,
     DIRECTION_CHOSEN,
-    TURN_END
+    TURN_END,
+    END_GAME
 }

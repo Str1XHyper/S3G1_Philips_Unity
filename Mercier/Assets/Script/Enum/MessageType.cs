@@ -14,5 +14,6 @@ public enum MessageType
     PASSED_START,
     BOUGHT_STAR,
     ANSWERED_QUESTION,
-    PLAYER_JOIN
+    PLAYER_JOIN,
+    START_GAME
 }
