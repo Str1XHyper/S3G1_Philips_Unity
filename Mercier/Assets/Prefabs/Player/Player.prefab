@@ -4635,6 +4635,9 @@ MonoBehaviour:
   starText: {fileID: 2128321204}
   questionText: {fileID: 1017401985}
   questionGroup: {fileID: 1573486635}
+  buttonSend: {fileID: 1157354811}
+  buttonContinue: {fileID: 2067291598}
+  buttonStart: {fileID: 1704798127}
   correctAnswerText: {fileID: 1338712584}
   answerInput: {fileID: 101388520}
   InputGroup: {fileID: 1151615801}
@@ -5347,7 +5350,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5741514810630530655}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
