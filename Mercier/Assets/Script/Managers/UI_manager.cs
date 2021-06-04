@@ -38,16 +38,25 @@ public class UI_manager : MonoBehaviour
     [SerializeField] private TMP_InputField answerInput;
     [SerializeField] private GameObject InputGroup;
 
-
     //Feedback
     [Space]
     [Header("Feedback")]
     [SerializeField] private GameObject FeedbackGroup;
     [SerializeField] private GameObject FeedbackCorrectBackground;
 
-    void Start()
-    {
+    private bool startGameButtonActive = true;
+    private bool gameAlreadyStarted = false;
 
+    void LateUpdate()
+    {
+        if (!gameAlreadyStarted)
+        {
+            if (!startGameButtonActive)
+            {
+                gameAlreadyStarted = true;
+                buttonStart.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void UpdateText()
@@ -94,7 +103,7 @@ public class UI_manager : MonoBehaviour
 
     public void HideStartButton()
     {
-        buttonStart.gameObject.SetActive(false);
+        startGameButtonActive = false;
     }
 
     public void SendAnswer()

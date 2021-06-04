@@ -7,6 +7,8 @@ public class SocketListener : MonoBehaviour
 {
     private SocketConnection connection;
 
+    private int joinMessages_Received = 0;
+
     private void Start()
     {
         connection = GetComponent<SocketConnection>();
@@ -66,7 +68,9 @@ public class SocketListener : MonoBehaviour
 
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
-        if (playerJoinResponse.players.Length > 0)
+        joinMessages_Received++;
+
+        if (joinMessages_Received == 1 && playerJoinResponse.players.Length > 1)
         {
             UI_manager.instance.HideStartButton();
         }

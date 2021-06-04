@@ -34,7 +34,6 @@ public class TurnManager : MonoBehaviour
         StarPlacer.instance.PlaceStarOnBoard();
         CurrentPlayerGroup.GroupPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
     }
-    //TODO: tijn fix ff
 
     private void Update()
     {

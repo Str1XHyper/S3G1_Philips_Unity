@@ -17,7 +17,8 @@ public class Turn
 
     public Turn(PlayerGroup currentPlayerGroup)
     {
-        currentTurnState = TurnState.AWAITING_START;
+        //currentTurnState = TurnState.AWAITING_START;
+        currentTurnState = TurnState.START;
         this.currentPlayerGroup = currentPlayerGroup;
     }
 
