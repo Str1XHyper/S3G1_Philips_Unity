@@ -21,7 +21,11 @@ public class SmartTile : MonoBehaviour
     private void Awake()
     {
         star = GetComponentInChildren<Star>();
-        star.DeSpawnStar();
+
+        if (star != null)
+        {
+            star.DeSpawnStar();
+        }
     }
 
     public void Start()

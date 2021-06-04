@@ -34,8 +34,12 @@ public class BackEndCommunicationManager : MonoBehaviour
     private string GetLessonIdFromURL()
     {
         string url = Application.absoluteURL;
+        string lessonIDFromUrl = "";
 
-        string lessonIDFromUrl = url.Split('=')[1];
+        if (!string.IsNullOrEmpty(lessonIDFromUrl))
+        {
+            lessonIDFromUrl = url.Split('=')[1];
+        }
 
         return lessonIDFromUrl;
     }
