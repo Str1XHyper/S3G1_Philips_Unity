@@ -47,7 +47,7 @@ public class UI_manager : MonoBehaviour
     private bool startGameButtonActive = true;
     private bool gameAlreadyStarted = false;
 
-    void Update()
+    void LateUpdate()
     {
         if (!gameAlreadyStarted)
         {
