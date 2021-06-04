@@ -13,7 +13,7 @@ public class Pawn : MonoBehaviour
 
     private string username;
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }
@@ -26,6 +26,11 @@ public class Pawn : MonoBehaviour
 
     public void MovePawn(int amountToMove)
     {
+        if (pawnMover == null)
+        {
+            Init();
+        }
+
         pawnMover.MovePawn(amountToMove);
     }
 

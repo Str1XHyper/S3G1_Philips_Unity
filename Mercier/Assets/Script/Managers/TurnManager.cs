@@ -40,7 +40,7 @@ public class TurnManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartNewTurn();
+            //StartNewTurn();
         }
 
         if (currentTurn != null)

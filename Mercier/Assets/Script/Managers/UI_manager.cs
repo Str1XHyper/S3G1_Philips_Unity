@@ -28,6 +28,7 @@ public class UI_manager : MonoBehaviour
     [SerializeField] private GameObject questionGroup;
     [SerializeField] private Button buttonSend;
     [SerializeField] private Button buttonContinue;
+    [SerializeField] private Button buttonStart;
     [SerializeField] private TMP_Text correctAnswerText;
     [SerializeField] private GameObject InputGroup;
     [SerializeField] private GameObject FeedbackGroup;
@@ -70,6 +71,17 @@ public class UI_manager : MonoBehaviour
         questionGroup.gameObject.SetActive(true);
         InputGroup.gameObject.SetActive(true);
         Debug.Log("trigger UI_Manager");
+    }
+
+    public void StartGame()
+    {
+        SocketCaller.instance.StartGame(new StartGameMessage("1"));
+        HideStartButton();
+    }
+
+    public void HideStartButton()
+    {
+        buttonStart.gameObject.SetActive(false);
     }
 
     public void SendAnswer()

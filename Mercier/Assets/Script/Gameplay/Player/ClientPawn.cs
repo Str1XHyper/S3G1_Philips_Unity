@@ -50,7 +50,7 @@ public class ClientPawn : Pawn
 
         if (string.IsNullOrEmpty(data))
         {
-            playerId = UnityEngine.Random.Range(1, 9999).ToString();
+            playerId = Guid.NewGuid().ToString();
         }
         else
         {

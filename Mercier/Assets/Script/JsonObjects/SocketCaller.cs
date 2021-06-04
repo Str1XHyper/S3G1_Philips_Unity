@@ -32,6 +32,11 @@ public class SocketCaller : MonoBehaviour
         connection.Send(json);
     }
 
+    public void StartGame(StartGameMessage startGame)
+    {
+        SendJson(startGame);
+    }
+
     public void DiceThrown(DiceThrowMessage diceThrow)
     {
         SendJson(diceThrow);

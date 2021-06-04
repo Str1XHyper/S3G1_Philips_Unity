@@ -66,6 +66,11 @@ public class SocketListener : MonoBehaviour
 
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
+        if (playerJoinResponse.players.Length > 0)
+        {
+            UI_manager.instance.HideStartButton();
+        }
+
         foreach (JsonPlayer player in playerJoinResponse.players)
         {
             GroupsManager.instance.CreateServerPlayer(player);
@@ -98,6 +103,9 @@ public class SocketListener : MonoBehaviour
 
     private void HandleStartGame(StartGameResponse startGameResponse)
     {
-
+        if (startGameResponse.playerId == GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID)
+        {
+            TurnManager.instance.StartNewTurn();
+        }
     }
 }

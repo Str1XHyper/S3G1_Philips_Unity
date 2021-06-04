@@ -30,16 +30,21 @@ public class Turn
     {
         if (!alreadyStartedMoved)
         {
-            RollDice();
-            
-            alreadyStartedMoved = true;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                RollDice();
+                alreadyStartedMoved = true;
+            }
         }
 
-        //if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
-        //{
-        //    currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
-        //    currentTurnState = TurnState.ENCOUNTER_SPACE;
-        //}
+        if (currentPlayerGroup.GroupPawn.PawnMover != null)
+        {
+            if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
+            {
+                currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
+                currentTurnState = TurnState.ENCOUNTER_SPACE;
+            }
+        }
     }
 
     public void EncounterSpace()
