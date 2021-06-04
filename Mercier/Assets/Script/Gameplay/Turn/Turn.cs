@@ -17,13 +17,18 @@ public class Turn
 
     public Turn(PlayerGroup currentPlayerGroup)
     {
-        currentTurnState = TurnState.START;
+        currentTurnState = TurnState.AWAITING_START;
         this.currentPlayerGroup = currentPlayerGroup;
     }
 
     public void Start()
     {
         currentTurnState = TurnState.MOVEMENT;
+    }
+
+    public void StartTurn()
+    {
+        currentTurnState = TurnState.START;
     }
 
     public void Movement()

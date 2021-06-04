@@ -85,7 +85,7 @@ public class SocketListener : MonoBehaviour
 
     private void HandleQuestion(QuestionResponse questionResponse)
     {
-
+        QuestionManager.instance.AskQuestion(questionResponse.question);
     }
 
     private void HandleMovePlayer(MovePlayerResponse movePlayerResponse)

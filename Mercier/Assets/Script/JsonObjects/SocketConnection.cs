@@ -17,6 +17,11 @@ public class SocketConnection : MonoBehaviour
         StartCoroutine(ConnectAndTest());
     }
 
+    private void Awake()
+    {
+        UnityThread.initUnityThread();
+    }
+
     public void Send(string message)
     {
         if (ws.IsAlive)

@@ -82,4 +82,9 @@ public class SocketCaller : MonoBehaviour
     {
         SendJson(turnEnd);
     }
+
+    public void StartGame()
+    {
+        SendJson(new StartGameMessage("0"));
+    }
 }
