@@ -20,15 +20,11 @@ public class Turn
         //currentTurnState = TurnState.AWAITING_START;
         currentTurnState = TurnState.START;
         this.currentPlayerGroup = currentPlayerGroup;
-        DiceRoller.instance.StartRollAnimation();
     }
 
     public void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            currentTurnState = TurnState.MOVEMENT;
-        }
+        currentTurnState = TurnState.MOVEMENT;
     }
 
     public void StartTurn()
@@ -82,7 +78,7 @@ public class Turn
         //Cheat code TODO: remove at final
         if (Input.GetKey(KeyCode.Alpha1))
             rolledNumber = 1; 
-
+        
         SocketCaller.instance.DiceThrown(new DiceThrowMessage(currentPlayerGroup.GroupPawn.PlayerID, rolledNumber));
     }
 

@@ -36,10 +36,7 @@ public class Pawn : MonoBehaviour
 
     public void MovePawnDirectlyToTile(SmartTile tileToMoveTo)
     {
-        if (pawnMover != null)
-        {
-            pawnMover.MovePawnDirectlyToTile(tileToMoveTo);
-        }
+        pawnMover.MovePawnDirectlyToTile(tileToMoveTo);
     }
 
     public void SetID(string playerID)
