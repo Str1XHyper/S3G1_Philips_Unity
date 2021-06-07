@@ -7,6 +7,8 @@ public class SocketListener : MonoBehaviour
 {
     private SocketConnection connection;
 
+    private int joinMessages_Received = 0;
+
     private void Start()
     {
         connection = GetComponent<SocketConnection>();
@@ -66,6 +68,13 @@ public class SocketListener : MonoBehaviour
 
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
+        joinMessages_Received++;
+
+        if (joinMessages_Received == 1 && playerJoinResponse.players.Length > 1)
+        {
+            UI_manager.instance.HideStartButton();
+        }
+
         foreach (JsonPlayer player in playerJoinResponse.players)
         {
             GroupsManager.instance.CreateServerPlayer(player);
@@ -80,7 +89,7 @@ public class SocketListener : MonoBehaviour
 
     private void HandleQuestion(QuestionResponse questionResponse)
     {
-
+        QuestionManager.instance.AskQuestion(questionResponse.question);
     }
 
     private void HandleMovePlayer(MovePlayerResponse movePlayerResponse)
@@ -98,6 +107,9 @@ public class SocketListener : MonoBehaviour
 
     private void HandleStartGame(StartGameResponse startGameResponse)
     {
-
+        if (startGameResponse.playerId == GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID)
+        {
+            TurnManager.instance.StartNewTurn();
+        }
     }
 }

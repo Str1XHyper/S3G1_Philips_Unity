@@ -17,6 +17,7 @@ public class Turn
 
     public Turn(PlayerGroup currentPlayerGroup)
     {
+        //currentTurnState = TurnState.AWAITING_START;
         currentTurnState = TurnState.START;
         this.currentPlayerGroup = currentPlayerGroup;
     }
@@ -26,19 +27,29 @@ public class Turn
         currentTurnState = TurnState.MOVEMENT;
     }
 
+    public void StartTurn()
+    {
+        currentTurnState = TurnState.START;
+    }
+
     public void Movement()
     {
         if (!alreadyStartedMoved)
         {
-            RollDice();
-            
-            alreadyStartedMoved = true;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                RollDice();
+                alreadyStartedMoved = true;
+            }
         }
 
-        if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
+        if (currentPlayerGroup.GroupPawn.PawnMover != null)
         {
-            currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
-            currentTurnState = TurnState.ENCOUNTER_SPACE;
+            if (currentPlayerGroup.GroupPawn.PawnMover.DoneMoving && alreadyStartedMoved)
+            {
+                currentPlayerGroup.GroupPawn.PawnMover.DoneMoving = false;
+                currentTurnState = TurnState.ENCOUNTER_SPACE;
+            }
         }
     }
 

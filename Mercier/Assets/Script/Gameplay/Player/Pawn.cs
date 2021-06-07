@@ -15,12 +15,22 @@ public class Pawn : MonoBehaviour
 
     private void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         playerGroup = GetComponent<PlayerGroup>();
         pawnMover = GetComponent<PawnMover>();
     }
 
     public void MovePawn(int amountToMove)
     {
+        if (pawnMover == null)
+        {
+            Init();
+        }
+
         pawnMover.MovePawn(amountToMove);
     }
 

@@ -21,24 +21,32 @@ public class GroupsManager : MonoBehaviour
 
     [SerializeField] private List<PlayerGroup> playerGroupsInGame = new List<PlayerGroup>();
 
-    private JsonPlayer player;
-    private bool spawnPlayer = false;
+    private List<JsonPlayer> playersToSpawn = new List<JsonPlayer>();
+    private bool canSpawn = true;
 
     private void Update()
     {
-        if (spawnPlayer)
+        if (playersToSpawn.Count > 0)
         {
-            spawnPlayer = false;
+            JsonPlayer playerToSpawn = playersToSpawn[0];
 
-            GameObject newPlayerGroup = Instantiate(serverPlayerGroupPrefab);
+            if (!ContainsID(playerToSpawn.PlayerID))
+            {
+                canSpawn = false;
 
-            ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
+                GameObject newPlayerGroup = Instantiate(serverPlayerGroupPrefab);
 
-            serverPawn.SetID(player.PlayerID);
-            serverPawn.SetUserName(player.Username);
-            serverPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
+                ServerPawn serverPawn = newPlayerGroup.GetComponent<ServerPawn>();
 
-            PlayerGroupsInGame.Add(newPlayerGroup.GetComponent<PlayerGroup>());
+                serverPawn.Init();
+                serverPawn.SetID(playerToSpawn.PlayerID);
+                serverPawn.SetUserName(playerToSpawn.Username);
+                serverPawn.MovePawnDirectlyToTile(TileManager.instance.GetStartTile());
+
+                PlayerGroupsInGame.Add(newPlayerGroup.GetComponent<PlayerGroup>());
+                playersToSpawn.RemoveAt(0);
+                canSpawn = true;
+            }
         }
     }
 
@@ -71,8 +79,7 @@ public class GroupsManager : MonoBehaviour
         {
             if (GetLocalPlayer().GroupPawn.PlayerID != player.PlayerID)
             {
-                this.player = player;
-                spawnPlayer = true;
+                playersToSpawn.Add(player);
             }
         }
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3933174407734279978}
   - component: {fileID: 2378648442043029095}
   - component: {fileID: 144885730538727806}
+  - component: {fileID: 8222122415222989926}
   m_Layer: 0
   m_Name: MultiplayerPlayer
   m_TagString: Untagged
@@ -45,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9765d812a2e1353429edb4b4879f1121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfFramesToGetToNextSpace: 40
   animator: {fileID: 7112550607185231222}
 --- !u!114 &144885730538727806
 MonoBehaviour:
@@ -61,6 +61,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groupPawn: {fileID: 2378648442043029095}
   cam: {fileID: 0}
+--- !u!114 &8222122415222989926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933174407734279977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10272695e9d9f349acd8b47e3071856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8420020491192670930
 MonoBehaviour:
   m_ObjectHideFlags: 0

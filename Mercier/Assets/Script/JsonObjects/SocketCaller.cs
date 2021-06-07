@@ -32,6 +32,11 @@ public class SocketCaller : MonoBehaviour
         connection.Send(json);
     }
 
+    public void StartGame(StartGameMessage startGame)
+    {
+        SendJson(startGame);
+    }
+
     public void DiceThrown(DiceThrowMessage diceThrow)
     {
         SendJson(diceThrow);
@@ -40,7 +45,7 @@ public class SocketCaller : MonoBehaviour
     public void PlayerJoin(PlayerJoinMessage playerJoin)
     {
         GroupsManager.instance.GetLocalPlayer().GroupPawn.SetID(playerJoin.playerId);
-        GroupsManager.instance.PlayerGroupsInGame.Add(GroupsManager.instance.GetLocalPlayer());
+       // GroupsManager.instance.PlayerGroupsInGame.Add(GroupsManager.instance.GetLocalPlayer());
         SendJson(playerJoin);
     }
 
@@ -76,5 +81,10 @@ public class SocketCaller : MonoBehaviour
     public void EndTurn(TurnEndMessage turnEnd)
     {
         SendJson(turnEnd);
+    }
+
+    public void StartGame()
+    {
+        SendJson(new StartGameMessage("0"));
     }
 }

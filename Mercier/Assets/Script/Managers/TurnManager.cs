@@ -37,9 +37,9 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && currentTurn.CurrentTurnState == TurnState.AWAITING_START)
         {
-            StartNewTurn();
+            //StartNewTurn();
         }
 
         if (currentTurn != null)
@@ -57,11 +57,15 @@ public class TurnManager : MonoBehaviour
                     currentTurn.EncounterSpace();
                     break;
                 case TurnState.END:
+                    //Send dingie to server to make it known that you've ended your turn
                     currentTurn.End();
                     EndOfTurn();
                     break;
                 case TurnState.QUESTION:
-                      //CameraManager.instance.ChangeCameraTarget( INSERT TARGET HERE );
+                    //CameraManager.instance.ChangeCameraTarget( INSERT TARGET HERE );
+                    break;
+                case TurnState.AWAITING_START:
+                    
                     break;
                 default:
                     break;
@@ -79,25 +83,12 @@ public class TurnManager : MonoBehaviour
 
     private void EndOfTurn()
     {
-        currentGroupIndex++;
-
-        if (currentGroupIndex >= GroupsManager.instance.PlayerGroupsInGame.Count)
-        {
-            currentGroupIndex = 0;
-            EndOfRound();
-        }
-
-        //StartNewTurn();
-    }
-
-    private void EndOfRound()
-    {
         AskQuestion();
     }
 
     private void AskQuestion()
     {
-        QuestionManager.instance.AskQuestion();
+        //QuestionManager.instance.AskQuestion();
     }
 
     public PlayerGroup CurrentPlayerGroup { get => GroupsManager.instance.PlayerGroupsInGame[currentGroupIndex]; }

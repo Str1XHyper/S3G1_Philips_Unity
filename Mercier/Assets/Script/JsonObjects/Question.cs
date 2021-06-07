@@ -11,5 +11,5 @@ public class Question
     public string id;
     public string question;
     public string type;
-    public string answer;
+    public List<Answer> answers;
 }
