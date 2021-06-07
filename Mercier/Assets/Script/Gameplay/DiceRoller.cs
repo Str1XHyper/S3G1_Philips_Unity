@@ -15,6 +15,8 @@ public class DiceRoller : MonoBehaviour
 
     #endregion
 
+    [SerializeField] private Animator diceAnimator;
+
     private const int DiceMin = 1;
     private const int DiceMax = 6;
 
@@ -23,13 +25,23 @@ public class DiceRoller : MonoBehaviour
     public int GetRandomNumber()
     {
         RollDice();
+        UpdateUI();
         return randomNumber;
+    }
+
+    public void StartRollAnimation()
+    {
+        diceAnimator.SetInteger("RolledNumber", 0);
     }
 
     private void RollDice()
     {
         randomNumber = Random.Range(DiceMin, DiceMax);
-        Debug.Log("You rolled: " + randomNumber);
+    }
+
+    private void UpdateUI()
+    {
+        diceAnimator.SetInteger("RolledNumber", randomNumber);
         UI_manager.instance.UpdateText();
     }
 }

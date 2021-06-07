@@ -24,6 +24,7 @@ public class Turn
 
     public void Start()
     {
+        DiceRoller.instance.StartRollAnimation();
         currentTurnState = TurnState.MOVEMENT;
     }
 
