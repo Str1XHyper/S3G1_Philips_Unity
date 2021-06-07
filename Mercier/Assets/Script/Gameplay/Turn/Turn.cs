@@ -79,7 +79,7 @@ public class Turn
         //Cheat code TODO: remove at final
         if (Input.GetKey(KeyCode.Alpha1))
             rolledNumber = 1; 
-        
+
         SocketCaller.instance.DiceThrown(new DiceThrowMessage(currentPlayerGroup.GroupPawn.PlayerID, rolledNumber));
     }
 
