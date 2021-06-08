@@ -1979,10 +1979,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstPointText: {fileID: 1403603380}
   firstStarText: {fileID: 1672898169}
+  firstNameText: {fileID: 2136799569}
   secondPointText: {fileID: 870442719}
   secondStarText: {fileID: 1046377821}
+  secondNameText: {fileID: 1204906568}
   thirdPointText: {fileID: 246516131}
   thirdStarText: {fileID: 2016215616}
+  thirdNameText: {fileID: 1628833580}
 --- !u!1 &697065721
 GameObject:
   m_ObjectHideFlags: 0
@@ -9001,4 +9004,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1590855381051568, guid: f0371e756e6017b4c84e42073506be40,
     type: 3}
   m_PrefabInstance: {fileID: 7141901073906148738}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3306883849305986290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1018949230691400, guid: d461c345ada76d14f94fe72087cec0f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3307885050848907450}
   m_PrefabAsset: {fileID: 0}
