@@ -46,7 +46,6 @@ public class ChooseDirectionTile : SmartTile
     {
         if (GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID == currentPlayerGroup.GroupPawn.PlayerID)
         {
-            ArrowManager.instance.HideAllArrows();
             SocketCaller.instance.DirectionChosen(new DirectionChosenMessage(currentPlayerGroup.GroupPawn.PlayerID, chosenDirection));
         }
     }
@@ -57,7 +56,6 @@ public class ChooseDirectionTile : SmartTile
 
         if (GroupsManager.instance.GetLocalPlayer().GroupPawn.PlayerID == currentPlayerGroup.GroupPawn.PlayerID)
         {
-            ArrowManager.instance.ShowArrows(defaultDirection, alternateDirection);
             StartCoroutine(ChooseDirectionPrompt(currentPlayerGroup));
         }
 
