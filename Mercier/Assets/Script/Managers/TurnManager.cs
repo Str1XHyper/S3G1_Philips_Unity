@@ -59,7 +59,6 @@ public class TurnManager : MonoBehaviour
                 case TurnState.END:
                     //Send dingie to server to make it known that you've ended your turn
                     currentTurn.End();
-                    EndOfTurn();
                     break;
                 case TurnState.QUESTION:
                     //CameraManager.instance.ChangeCameraTarget( INSERT TARGET HERE );
@@ -77,18 +76,7 @@ public class TurnManager : MonoBehaviour
                 Debug.Log(lastState);
             }
 
-            UI_manager.instance.UpdateText();
         }
-    }
-
-    private void EndOfTurn()
-    {
-        AskQuestion();
-    }
-
-    private void AskQuestion()
-    {
-        //QuestionManager.instance.AskQuestion();
     }
 
     public PlayerGroup CurrentPlayerGroup { get => GroupsManager.instance.PlayerGroupsInGame[currentGroupIndex]; }

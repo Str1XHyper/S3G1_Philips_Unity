@@ -34,7 +34,7 @@ public class SocketListener : MonoBehaviour
                 HandleQuestion(JsonUtility.FromJson<QuestionResponse>(json));
                 break;
             case ResponseType.SCORE:
-                HandleScore(JsonHelper.getJsonArray<ScoreResponse>(json));
+                HandleScore(JsonUtility.FromJson<Scores>(json));
                 break;
             case ResponseType.PLAYER_JOIN:
                 HandlePlayerJoin(JsonUtility.FromJson<PlayerJoinResponse>(json));
@@ -82,9 +82,9 @@ public class SocketListener : MonoBehaviour
         }
     }
 
-    private void HandleScore(ScoreResponse[] scoreResponse)
+    private void HandleScore(Scores scoreResponse)
     {
-        UI_manager.instance.UpdateText(scoreResponse);
+        UnityThread.executeInLateUpdate(() => UI_manager.instance.UpdateText(scoreResponse));
     }
 
     private void HandleQuestion(QuestionResponse questionResponse)

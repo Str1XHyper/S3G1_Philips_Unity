@@ -87,4 +87,9 @@ public class SocketCaller : MonoBehaviour
     {
         SendJson(new StartGameMessage("0"));
     }
+
+    public void RequestScore()
+    {
+        SendJson(new GetScoreMessage(""));
+    }
 }
