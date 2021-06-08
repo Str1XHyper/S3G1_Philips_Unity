@@ -37,11 +37,6 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && currentTurn.CurrentTurnState == TurnState.AWAITING_START)
-        {
-            //StartNewTurn();
-        }
-
         if (currentTurn != null)
         {
             switch (currentTurn.CurrentTurnState)

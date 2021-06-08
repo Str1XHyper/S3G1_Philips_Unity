@@ -22,7 +22,7 @@ public class ClientPawn : Pawn
 
         string localPlayerId = GetPlayerID();
         string lessonId = GetLessonID();
-        SocketCaller.instance.PlayerJoin(new PlayerJoinMessage(localPlayerId, lessonId, "Piet"));
+        SocketCaller.instance.PlayerJoin(new PlayerJoinMessage(localPlayerId, lessonId, PlayerPrefs.GetString("Username")));
     }
 
     private string GetLessonID()

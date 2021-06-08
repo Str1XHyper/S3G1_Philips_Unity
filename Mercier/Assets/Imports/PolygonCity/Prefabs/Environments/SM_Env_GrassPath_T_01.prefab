@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3316942}
   - component: {fileID: 2336498}
   - component: {fileID: 65660594710824988}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SM_Env_GrassPath_T_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5756996061312724504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PawnPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,6 +133,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 464106}
     m_Modifications:
+    - target: {fileID: 4769726237819803102, guid: 17a4362b64452be4e86b0cdf4cf1fb47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4769726239792899594, guid: 17a4362b64452be4e86b0cdf4cf1fb47,
         type: 3}
       propertyPath: m_RootOrder
@@ -195,6 +200,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4769726239792899595, guid: 17a4362b64452be4e86b0cdf4cf1fb47,
         type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769726239792899595, guid: 17a4362b64452be4e86b0cdf4cf1fb47,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -216,6 +226,10 @@ PrefabInstance:
     - target: {fileID: 1208871959118300, guid: e0d3f8289f60e1e49a5d66d5eb8582f3, type: 3}
       propertyPath: m_Name
       value: SM_PolygonPrototype_Prop_Target_03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208871959118300, guid: e0d3f8289f60e1e49a5d66d5eb8582f3, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4047503882683654, guid: e0d3f8289f60e1e49a5d66d5eb8582f3, type: 3}
       propertyPath: m_RootOrder
