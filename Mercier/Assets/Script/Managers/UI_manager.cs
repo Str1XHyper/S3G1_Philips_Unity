@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text;
+using System.Linq;
 
 public class UI_manager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class UI_manager : MonoBehaviour
     #endregion
 
     //Old
+
     [Header("Old")]
     [SerializeField] private TMP_Text pointText;
     [SerializeField] private TMP_Text starText;
@@ -44,6 +46,16 @@ public class UI_manager : MonoBehaviour
     [SerializeField] private GameObject FeedbackGroup;
     [SerializeField] private GameObject FeedbackCorrectBackground;
 
+    //Leaderboard
+    [Space]
+    [Header("Leaderboard")]
+    [SerializeField] private TMP_Text leaderboardPointText;
+    [SerializeField] private TMP_Text leaderboardStarText;
+    [Space]
+    [SerializeField] private GameObject topThree;
+
+    //private List<> playersRanked;
+
     private bool startGameButtonActive = true;
     private bool gameAlreadyStarted = false;
 
@@ -61,20 +73,25 @@ public class UI_manager : MonoBehaviour
 
     public void UpdateText()
     {
-        pointText.text = "Points: " + TurnManager.instance.CurrentPlayerGroup.CurrentMoneyAmount.ToString();
-        starText.text = "Stars: " + TurnManager.instance.CurrentPlayerGroup.CurrentAmountOfStars.ToString();
+        leaderboardPointText.text = TurnManager.instance.CurrentPlayerGroup.CurrentMoneyAmount.ToString();
+        leaderboardStarText.text = TurnManager.instance.CurrentPlayerGroup.CurrentAmountOfStars.ToString();
+
+        SocketCaller.instance.RequestScore();
     }
 
-    public void UpdateText(ScoreResponse[] scoreResponses)
+    public void UpdateText(Scores scores)
     {
-        //TODO: TIJN fix ff dat hier scores afgehandeld worden per persoon
-        StringBuilder stringBuilder = new StringBuilder();
-        foreach (ScoreResponse response in scoreResponses)
+
+        List<ScoreResponse> listScoreResponse = new List<ScoreResponse>();
+        foreach (ScoreResponse response in scores.scoreResponses)
         {
-            stringBuilder.Append(response.playerId);
-            stringBuilder.Append(response.Points);
-            stringBuilder.Append(response.Stars);
+            listScoreResponse.Add(response);
+            
+            Debug.Log("Points: " + response.Points);
         }
+        List<ScoreResponse> scoreListSorted = listScoreResponse.OrderByDescending(response => response.Stars).ThenByDescending(response => response.Points).ToList();
+
+        topThree.GetComponent<LeaderBoard>().UpdateTopThree(scoreListSorted);
     }
 
     public void UpdateQuestion(string questionText)
@@ -124,6 +141,8 @@ public class UI_manager : MonoBehaviour
             FeedbackCorrectBackground.SetActive(false);
         }
 
+        
+        UI_manager.instance.UpdateText();
 
         answerInput.text = "";
         Debug.Log(answer);

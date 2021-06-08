@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class ScoreResponse : SocketResponse
+[Serializable]
+public class ScoreResponse
 {
-    public int Stars;
     public int Points;
+    public int Stars;
+    public string PlayerID;
 
-    protected ScoreResponse(string playerId, int amountOfStars, int amountOfPoints) : base(playerId)
+    public ScoreResponse(string playerId, int amountOfStars, int amountOfPoints)
     {
-        responseType = ResponseType.SCORE;
         this.Points = amountOfPoints;
         this.Stars = amountOfStars;
+        this.PlayerID = playerId;
     }
 }

@@ -62,6 +62,8 @@ public class Turn
 
         SocketCaller.instance.EncounterSpace(new EncounteredSpaceMessage(currentPlayerGroup.GroupPawn.PlayerID, currentTile.TileType));
 
+        UI_manager.instance.UpdateText();
+
         currentTurnState = TurnState.END;
     }
 
