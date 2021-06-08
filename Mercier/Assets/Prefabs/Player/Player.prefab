@@ -4665,6 +4665,7 @@ MonoBehaviour:
   leaderboardPointText: {fileID: 774202899}
   leaderboardStarText: {fileID: 1093534775}
   topThree: {fileID: 678435262}
+  spacebarImage: {fileID: 7068388043530034968}
 --- !u!1 &1573486635
 GameObject:
   m_ObjectHideFlags: 0
@@ -5372,7 +5373,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5741514810630530655}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -6872,7 +6873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7373607836673236764
 RectTransform:
   m_ObjectHideFlags: 0
