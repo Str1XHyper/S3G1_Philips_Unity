@@ -54,6 +54,9 @@ public class UI_manager : MonoBehaviour
     [Space]
     [SerializeField] private GameObject topThree;
 
+    [Space]
+    [Header("Spacebar")]
+    [SerializeField] private Image spacebarImage;
     //private List<> playersRanked;
 
     private bool startGameButtonActive = true;
@@ -69,6 +72,11 @@ public class UI_manager : MonoBehaviour
                 buttonStart.gameObject.SetActive(false);
             }
         }
+    }
+
+    public void SetSpacebarImage(bool isVisible)
+    {
+        spacebarImage.gameObject.SetActive(isVisible);
     }
 
     public void UpdateText()

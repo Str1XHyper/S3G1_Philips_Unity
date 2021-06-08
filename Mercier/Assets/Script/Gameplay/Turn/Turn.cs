@@ -25,6 +25,7 @@ public class Turn
     public void Start()
     {
         DiceRoller.instance.StartRollAnimation();
+        UI_manager.instance.SetSpacebarImage(true);
         currentTurnState = TurnState.MOVEMENT;
     }
 
@@ -70,13 +71,15 @@ public class Turn
     public void End()
     {
         SocketCaller.instance.EndTurn(new TurnEndMessage(currentPlayerGroup.GroupPawn.PlayerID, 1));
-
+        
         currentTurnState = TurnState.QUESTION;
     }
 
     private void RollDice()
     {
         rolledNumber = DiceRoller.instance.GetRandomNumber();
+
+        UI_manager.instance.SetSpacebarImage(false);
 
         //Cheat code TODO: remove at final
         if (Input.GetKey(KeyCode.Alpha1))
