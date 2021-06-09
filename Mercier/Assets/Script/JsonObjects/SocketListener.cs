@@ -44,7 +44,7 @@ public class SocketListener : MonoBehaviour
                 HandleDirectionChosenResponse(JsonUtility.FromJson<DirectionChosenResponse>(json));
                 break;
             case ResponseType.END_GAME:
-                HandleEndGame();
+                HandleEndGameResponse();
                 break;
             default:
                 break;
@@ -70,7 +70,7 @@ public class SocketListener : MonoBehaviour
         }
     }
 
-    private void HandleEndGame()
+    private void HandleEndGameResponse()
     {
        LeaderBoard.SaveLeaderboard();
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

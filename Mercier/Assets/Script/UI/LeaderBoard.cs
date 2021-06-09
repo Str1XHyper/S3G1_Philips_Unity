@@ -40,15 +40,7 @@ public class LeaderBoard : MonoBehaviour
         }
     }
 
-    /*
-     * TODO: 
-    Creeate a static function thats turn the leaderbord into a player pref
-    Call this function on Scene Switch
-    In test script add the same textfields as LeaderBoard
-    Than in the TestScript Call the set of the fields at start
 
-    Example: https://www.youtube.com/watch?v=scrzEyaIQQk&ab_channel=CatoDevs-Unity%26RTutorialsCatoDevs-Unity%26RTutorials
-     */
     public static void SaveLeaderboard()
     {
         List<ScoreResponse> leaderBoardScores = UI_manager.instance.Leaderboard;
