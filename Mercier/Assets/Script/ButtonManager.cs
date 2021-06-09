@@ -37,12 +37,6 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    //TOD:Remove after ENd scene is done 
-    public void LoadEndScene()
-    {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
     public void CloseApplication()
     {
         Application.Quit();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using WebSocketSharp;
 
 public class SocketListener : MonoBehaviour
@@ -42,6 +43,9 @@ public class SocketListener : MonoBehaviour
             case ResponseType.DIRECTION_CHOSEN:
                 HandleDirectionChosenResponse(JsonUtility.FromJson<DirectionChosenResponse>(json));
                 break;
+            case ResponseType.END_GAME:
+                HandleEndGame();
+                break;
             default:
                 break;
         }
@@ -65,6 +69,13 @@ public class SocketListener : MonoBehaviour
             }
         }
     }
+
+    private void HandleEndGame()
+    {
+       LeaderBoard.SaveLeaderboard();
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {

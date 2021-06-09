@@ -57,7 +57,7 @@ public class UI_manager : MonoBehaviour
     [Space]
     [Header("Spacebar")]
     [SerializeField] private Image spacebarImage;
-    //private List<> playersRanked;
+    private List<ScoreResponse> leaderBoard;
 
     private bool startGameButtonActive = true;
     private bool gameAlreadyStarted = false;
@@ -89,7 +89,6 @@ public class UI_manager : MonoBehaviour
 
     public void UpdateText(Scores scores)
     {
-
         List<ScoreResponse> listScoreResponse = new List<ScoreResponse>();
         foreach (ScoreResponse response in scores.scoreResponses)
         {
@@ -99,8 +98,8 @@ public class UI_manager : MonoBehaviour
         }
         List<ScoreResponse> scoreListSorted = listScoreResponse.OrderByDescending(response => response.Stars).ThenByDescending(response => response.Points).ToList();
 
+        leaderBoard = scoreListSorted;
         topThree.GetComponent<LeaderBoard>().UpdateTopThree(scoreListSorted);
-        leaderBoardComponent = topThree;
     }
 
     public void UpdateQuestion(string questionText)
@@ -163,7 +162,7 @@ public class UI_manager : MonoBehaviour
         questionGroup.gameObject.SetActive(false);
     }
 
-    public static GameObject leaderBoardComponent;
+    public List<ScoreResponse> Leaderboard { get => leaderBoard; private set => leaderBoard = value; }
     public TMP_Text PointText { get => pointText; private set => pointText = value; }
     public TMP_Text StarText { get => starText; private set => starText = value; }
     public TMP_Text QuestionText { get => questionText; private set => questionText = value; }
