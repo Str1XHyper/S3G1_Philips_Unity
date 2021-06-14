@@ -71,8 +71,11 @@ public class SocketListener : MonoBehaviour
     }
     private void HandleEndGameResponse()
     {
-       LeaderBoard.SaveLeaderboard();
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        UnityThread.executeInLateUpdate(() =>
+        {
+            LeaderBoard.SaveLeaderboard();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        });
     }
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
