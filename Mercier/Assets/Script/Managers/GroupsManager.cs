@@ -13,7 +13,6 @@ public class GroupsManager : MonoBehaviour
         if (instance != this || instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
     }
     #endregion
