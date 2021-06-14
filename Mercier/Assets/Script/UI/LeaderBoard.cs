@@ -42,7 +42,7 @@ public class LeaderBoard : MonoBehaviour
 
     public static void SaveLeaderboard()
     {
-        List<ScoreResponse> leaderBoardScores = UI_manager.instance.scoreResponses;
+        List<ScoreResponse> leaderBoardScores = UI_manager.instance.Leaderboard;
         if(!string.IsNullOrEmpty(leaderBoardScores[0].Username))
         {
             PlayerPrefs.SetString("Pos1Name", leaderBoardScores[0].Username);

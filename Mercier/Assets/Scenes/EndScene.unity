@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 1318245882}
   - component: {fileID: 1318245884}
   - component: {fileID: 1318245883}
+  - component: {fileID: 1318245885}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -287,6 +288,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318245881}
   m_CullTransparentMesh: 0
+--- !u!114 &1318245885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318245881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3a0ee519f819b42bfd68221c40b488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winnerText: {fileID: 0}
+  firstPointText: {fileID: 0}
+  firstStarText: {fileID: 0}
+  firstNameText: {fileID: 0}
+  secondPointText: {fileID: 0}
+  secondStarText: {fileID: 0}
+  secondNameText: {fileID: 0}
+  thirdPointText: {fileID: 0}
+  thirdStarText: {fileID: 0}
+  thirdNameText: {fileID: 0}
 --- !u!1 &1494359926
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,9 +422,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1494359926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e92173b13a67f449bde712d8571c489, type: 3}
+  m_Script: {fileID: 11500000, guid: df3a0ee519f819b42bfd68221c40b488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winnerText: {fileID: 1526898567}
+  firstPointText: {fileID: 2615921397370665474}
+  firstStarText: {fileID: 2615921396563318223}
+  firstNameText: {fileID: 2615921397031668455}
+  secondPointText: {fileID: 2615921397911229801}
+  secondStarText: {fileID: 2615921398122022635}
+  secondNameText: {fileID: 2615921397174049278}
+  thirdPointText: {fileID: 2615921398392551957}
+  thirdStarText: {fileID: 2615921396942598646}
+  thirdNameText: {fileID: 2615921396523496602}
 --- !u!1 &1526898565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,18 +2304,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2615921397569422562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615921397750721032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1000baf9a0c323944a36c6ce2401e92a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2615921397582488768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2570,7 +2591,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2615921397750721033}
-  - component: {fileID: 2615921397569422562}
   m_Layer: 5
   m_Name: TopThree
   m_TagString: Untagged
