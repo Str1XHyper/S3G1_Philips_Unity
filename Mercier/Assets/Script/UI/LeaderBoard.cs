@@ -39,4 +39,35 @@ public class LeaderBoard : MonoBehaviour
             }
         }
     }
+
+    public static void SaveLeaderboard()
+    {
+        List<ScoreResponse> leaderBoardScores = UI_manager.instance.scoreResponses;
+        if(!string.IsNullOrEmpty(leaderBoardScores[0].Username))
+        {
+            PlayerPrefs.SetString("Pos1Name", leaderBoardScores[0].Username);
+            PlayerPrefs.SetInt("Pos1Points", leaderBoardScores[0].Points);
+            PlayerPrefs.SetInt("Pos1Stars", leaderBoardScores[0].Stars);
+        };
+
+        if (leaderBoardScores.Count >= 2)
+        {
+            if (!string.IsNullOrEmpty(leaderBoardScores[1].Username))
+            {
+                PlayerPrefs.SetString("Pos2Name", leaderBoardScores[1].Username);
+                PlayerPrefs.SetInt("Pos2Points", leaderBoardScores[1].Points);
+                PlayerPrefs.SetInt("Pos2Stars", leaderBoardScores[1].Stars);
+            }
+
+            if(leaderBoardScores.Count >= 3)
+            {
+                if (!string.IsNullOrEmpty(leaderBoardScores[2].Username))
+                {
+                    PlayerPrefs.SetString("Pos3Name", leaderBoardScores[2].Username);
+                    PlayerPrefs.SetInt("Pos3Points", leaderBoardScores[2].Points);
+                    PlayerPrefs.SetInt("Pos3Stars", leaderBoardScores[2].Stars);
+                }
+            }
+        }
+    }
 }
