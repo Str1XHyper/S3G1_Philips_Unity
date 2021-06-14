@@ -99,8 +99,8 @@ public class UI_manager : MonoBehaviour
         }
         List<ScoreResponse> scoreListSorted = listScoreResponse.OrderByDescending(response => response.Stars).ThenByDescending(response => response.Points).ToList();
 
+        scoreResponses = scoreListSorted;
         topThree.GetComponent<LeaderBoard>().UpdateTopThree(scoreListSorted);
-        leaderBoardComponent = topThree;
     }
 
     public void UpdateQuestion(string questionText)
@@ -163,7 +163,7 @@ public class UI_manager : MonoBehaviour
         questionGroup.gameObject.SetActive(false);
     }
 
-    public static GameObject leaderBoardComponent;
+    public List<ScoreResponse> scoreResponses;
     public TMP_Text PointText { get => pointText; private set => pointText = value; }
     public TMP_Text StarText { get => starText; private set => starText = value; }
     public TMP_Text QuestionText { get => questionText; private set => questionText = value; }
