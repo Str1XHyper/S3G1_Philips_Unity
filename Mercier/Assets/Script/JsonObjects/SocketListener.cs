@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using WebSocketSharp;
 
 public class SocketListener : MonoBehaviour
@@ -69,14 +68,11 @@ public class SocketListener : MonoBehaviour
             }
         }
     }
-
     private void HandleEndGameResponse()
     {
        LeaderBoard.SaveLeaderboard();
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-
     private void HandlePlayerJoin(PlayerJoinResponse playerJoinResponse)
     {
         joinMessages_Received++;

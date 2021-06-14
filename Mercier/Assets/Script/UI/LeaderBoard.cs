@@ -40,7 +40,6 @@ public class LeaderBoard : MonoBehaviour
         }
     }
 
-
     public static void SaveLeaderboard()
     {
         List<ScoreResponse> leaderBoardScores = UI_manager.instance.Leaderboard;
